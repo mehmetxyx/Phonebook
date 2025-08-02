@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\Phonebook_microservices_architecture_diagram.drawio = Docs\Phonebook_microservices_architecture_diagram.drawio
+		Docs\Phonebook_microservices_architecture_diagram.png = Docs\Phonebook_microservices_architecture_diagram.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0A6749E4-E849-4729-9C26-42F00B9B599E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contact", "Contact", "{F0AF7D2B-AFA3-4FBF-B2C7-DBEA80B69C86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Report", "Report", "{4DC85687-49CC-4DFC-B391-84DB72FBFE02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployments", "Deployments", "{41477C59-B655-49F1-9653-D3D433E6FADB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{615A6B33-AEE4-484C-9092-0DCC724F0FB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{472C81E0-4D68-418B-BE04-ACE46C96CE3C}"
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F0AF7D2B-AFA3-4FBF-B2C7-DBEA80B69C86} = {0A6749E4-E849-4729-9C26-42F00B9B599E}
+		{4DC85687-49CC-4DFC-B391-84DB72FBFE02} = {0A6749E4-E849-4729-9C26-42F00B9B599E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {587E730B-3552-4EB0-B7B5-B050C8CB554A}
+	EndGlobalSection
+EndGlobal
