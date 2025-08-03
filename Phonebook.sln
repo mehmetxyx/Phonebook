@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{02EA681E-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0A6749E4-E849-4729-9C26-42F00B9B599E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contact", "Contact", "{F0AF7D2B-AFA3-4FBF-B2C7-DBEA80B69C86}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContactManagement", "ContactManagement", "{F0AF7D2B-AFA3-4FBF-B2C7-DBEA80B69C86}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Report", "Report", "{4DC85687-49CC-4DFC-B391-84DB72FBFE02}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReportManagement", "ReportManagement", "{4DC85687-49CC-4DFC-B391-84DB72FBFE02}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployments", "Deployments", "{41477C59-B655-49F1-9653-D3D433E6FADB}"
 EndProject
@@ -23,19 +23,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{472C81
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2E2CCFDF-FCCC-4C86-A1F6-3D096B5AC503}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Api.Tests", "Services\Contact\Tests\Contact.Api.Tests\Contact.Api.Tests.csproj", "{A730F444-20BE-490C-8FE5-BEFDD18BEDEE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManagement.Api.Tests", "Services\ContactManagement\Tests\ContactManagement.Api.Tests\ContactManagement.Api.Tests.csproj", "{A730F444-20BE-490C-8FE5-BEFDD18BEDEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Api", "Services\Contact\Contact.Api\Contact.Api.csproj", "{8F90467D-5E1D-469C-9FA2-73427707ED59}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManagement.Api", "Services\ContactManagement\ContactManagement.Api\ContactManagement.Api.csproj", "{8F90467D-5E1D-469C-9FA2-73427707ED59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Application", "Services\Contact\Contact.Application\Contact.Application.csproj", "{1A69FFE7-B813-469A-9B54-A073A63292D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManagement.Application", "Services\ContactManagement\ContactManagement.Application\ContactManagement.Application.csproj", "{1A69FFE7-B813-469A-9B54-A073A63292D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Api.Common", "Shared\Shared.Api.Common\Shared.Api.Common.csproj", "{47318D91-427A-8517-E6C6-8A05093869E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Common", "Shared\Shared.Common\Shared.Common.csproj", "{BD641065-2058-1585-8C8D-2CADA087F9A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Application.Tests", "Services\Contact\Tests\Contact.Application.Tests\Contact.Application.Tests.csproj", "{2A3E564A-FA75-41CE-A87F-FB27EF780FF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManagement.Application.Tests", "Services\ContactManagement\Tests\ContactManagement.Application.Tests\ContactManagement.Application.Tests.csproj", "{2A3E564A-FA75-41CE-A87F-FB27EF780FF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Domain", "Contact.Domain\Contact.Domain.csproj", "{290EB531-97D4-4DF8-B6C0-F4AC91BAC4BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManagement.Domain", "Services\ContactManagement\ContactManagement.Domain\ContactManagement.Domain.csproj", "{290EB531-97D4-4DF8-B6C0-F4AC91BAC4BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
