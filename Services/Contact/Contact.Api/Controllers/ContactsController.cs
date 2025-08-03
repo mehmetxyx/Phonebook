@@ -1,7 +1,7 @@
-using Contact.Application;
+using Contact.Application.Dtos;
+using Contact.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Api.Common;
-using Shared.Common;
 
 namespace Contact.Api.Controllers;
 [ApiController]
@@ -26,6 +26,7 @@ public class ContactsController : ControllerBase
         return BadRequest(result.ToApiResponse());
     }
 
+    [HttpDelete("{contactId}")]
     public async Task<ActionResult<ApiResponse<bool>>> DeleteContactAsync(Guid contactId)
     {
         var result = contactService.DeleteContactAsync(contactId);

@@ -1,4 +1,4 @@
-﻿namespace Contact.Application;
+﻿namespace Contact.Application.Dtos;
 
 public class GetContactResponse
 {

@@ -1,6 +1,7 @@
-﻿using Shared.Common;
+﻿using Contact.Application.Dtos;
+using Shared.Common;
 
-namespace Contact.Application;
+namespace Contact.Application.Services;
 
 public interface IContactService
 {

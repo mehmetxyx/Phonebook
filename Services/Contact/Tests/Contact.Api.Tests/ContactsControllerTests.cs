@@ -1,5 +1,6 @@
 ﻿using Contact.Api.Controllers;
-using Contact.Application;
+using Contact.Application.Dtos;
+using Contact.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
