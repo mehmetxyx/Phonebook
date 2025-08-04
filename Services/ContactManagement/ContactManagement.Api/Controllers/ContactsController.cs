@@ -19,7 +19,7 @@ public class ContactsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ApiResponse<ContactCreateResponse>>> CreateContactAsync(ContactCreateRequest request)
     {
-        var result = contactService.CreateContactAsync(request);
+        var result = await contactService.CreateContactAsync(request);
         if(result.IsSuccess)
             return CreatedAtAction(nameof(CreateContactAsync), new { id = result.Value.Id }, result.ToApiResponse());   
 
@@ -29,7 +29,7 @@ public class ContactsController : ControllerBase
     [HttpDelete("{contactId}")]
     public async Task<ActionResult<ApiResponse<bool>>> DeleteContactAsync(Guid contactId)
     {
-        var result = contactService.DeleteContactAsync(contactId);
+        var result = await contactService.DeleteContactAsync(contactId);
         if (result.IsSuccess)
             return Ok(result.ToApiResponse());
         return NotFound(result.ToApiResponse());
@@ -38,7 +38,7 @@ public class ContactsController : ControllerBase
     [HttpGet("{contactId}")]
     public async Task<ActionResult<ApiResponse<GetContactResponse>>> GetContactAsync(Guid contactId)
     {
-        var result = contactService.GetContactAsync(contactId);
+        var result = await contactService.GetContactByIdAsync(contactId);
 
         if(result.IsSuccess)
             return Ok(result.ToApiResponse());
@@ -49,7 +49,7 @@ public class ContactsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<ApiResponse<List<GetContactResponse>>>> GetContactsAsync()
     {
-        var result = contactService.GetContactsAsync();
+        var result = await contactService.GetContactsAsync();
         if (result.IsSuccess)
             return Ok(result.ToApiResponse()); 
         

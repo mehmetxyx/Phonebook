@@ -102,7 +102,7 @@ public class ContactsControllerTests
             }
         );
 
-        contactService.GetContactAsync(contactId)
+        contactService.GetContactByIdAsync(contactId)
             .Returns(contact);
 
         var contactsController = new ContactsController(logger, contactService);
@@ -118,7 +118,7 @@ public class ContactsControllerTests
         var contactId = Guid.NewGuid();
         var contact = Result<GetContactResponse>.Failure("Contact not found!");
 
-        contactService.GetContactAsync(contactId)
+        contactService.GetContactByIdAsync(contactId)
             .Returns(contact);
 
         var contactsController = new ContactsController(logger, contactService);

@@ -1,5 +1,5 @@
 ﻿namespace ContactManagement.Application.Dtos;
-using ContactManagement.Domain.DomainEntities;
+using ContactManagement.Domain.Entities;
 
 public static class ContactCreateRequestMapper
 {
@@ -10,8 +10,7 @@ public static class ContactCreateRequestMapper
             Id = Guid.NewGuid(),
             Name = request.Name,
             Surname = request.Surname,
-            Company = request.Company,
-            PhoneNumber = request.PhoneNumber
+            Company = request.Company
         };
     }
 }
