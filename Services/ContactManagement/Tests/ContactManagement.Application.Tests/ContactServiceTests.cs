@@ -15,18 +15,21 @@ public class ContactServiceTests
     private readonly IContactRepository contactRepository;
     private readonly IUnitOfWork unitOfWork;
     private readonly Fixture fixture;
+    private readonly ContactService contactService;
     public ContactServiceTests()
     {
         logger = Substitute.For<ILogger<ContactService>>();
         contactRepository = Substitute.For<IContactRepository>();
         unitOfWork = Substitute.For<IUnitOfWork>();
+        contactService = new ContactService(logger, unitOfWork, contactRepository);
         fixture = new Fixture();
     }
+
     [Fact]
     public async Task CreateContactAsync_WhenSuccessful_Returns_Success()
     {
-        var contactService = new ContactService(logger, unitOfWork, contactRepository);
-        await contactRepository.AddAsync(Arg.Any<Contact>());
+        contactRepository.AddAsync(Arg.Any<Contact>())
+            .Returns(Task.CompletedTask);
 
         var request = fixture.Create<ContactCreateRequest>();
 
@@ -38,7 +41,6 @@ public class ContactServiceTests
     [Fact]
     public async Task CreateContactAsync_WhenFailed_Returns_False()
     {
-        var contactService = new ContactService(logger, unitOfWork, contactRepository);
         contactRepository.When(x => x.AddAsync(Arg.Any<Contact>()))
             .Do(x => { throw new Exception("Failed to add contact"); });
 
@@ -52,8 +54,6 @@ public class ContactServiceTests
     [Fact]
     public async Task GetContactsAsync_WhenSuccessful_Returns_AllContacts()
     {
-        var contactService = new ContactService(logger, unitOfWork, contactRepository);
-
         var contacts = fixture.Build<Contact>()
             .CreateMany(3)
             .ToList();
@@ -69,8 +69,6 @@ public class ContactServiceTests
     [Fact]
     public async Task GetContactsAsync_WhenFailed_Returns_False()
     {
-        var contactService = new ContactService(logger, unitOfWork, contactRepository);
-
         contactRepository.When(x => x.GetAllAsync())
             .Do(x => { throw new Exception("Failed to retrieve contacts"); });
 
@@ -82,46 +80,38 @@ public class ContactServiceTests
     [Fact]
     public async Task GetContactByIdAsync_WhenContactFound_Returns_True()
     {
-        var contactService = new ContactService(logger, unitOfWork, contactRepository);
-
         var contact = fixture.Build<Contact>()
             .Create();
 
         contactRepository.GetByIdAsync(contact.Id)
-            .Returns(Task.FromResult(contact));
+            .Returns(Task.FromResult<Contact?>(contact));
 
         var result = await contactService.GetContactByIdAsync(contact.Id); ;
 
         Assert.True(result.IsSuccess);
-        Assert.Equal(contact.Id, result.Value.Id);
+        Assert.Equal(contact.Id, result?.Value?.Id);
     }
 
     [Fact]
     public async Task GetContactByIdAsync_WhenContactNotFound_Returns_False()
     {
-        var contactService = new ContactService(logger, unitOfWork, contactRepository);
-        var contactId = Guid.NewGuid();
+        var contact = fixture.Create<Contact>();
 
-        var contact = fixture.Build<Contact>()
-            .With(x => x.Id, contactId)
-            .Create();
-
-        contactRepository.GetByIdAsync(contactId)
+        contactRepository.GetByIdAsync(contact.Id)
             .Returns(Task.FromResult<Contact?>(null));
 
-        var result = await contactService.GetContactByIdAsync(contactId); ;
+        var result = await contactService.GetContactByIdAsync(contact.Id);
 
-        Assert.False(result.IsSuccess);;
+        Assert.False(result.IsSuccess);
     }
 
     [Fact]
     public async Task DeleteContactAsync_WhenContactDeleted_Returns_True()
     {
-        var contactService = new ContactService(logger, unitOfWork, contactRepository);
         var contact = fixture.Create<Contact>();
 
         contactRepository.GetByIdAsync(contact.Id)
-            .Returns(Task.FromResult(contact));
+            .Returns(Task.FromResult<Contact?>(contact));
 
         var result = await contactService.DeleteContactAsync(contact.Id);
         Assert.True(result.IsSuccess);
@@ -130,7 +120,6 @@ public class ContactServiceTests
     [Fact]
     public async Task DeleteContactAsync_WhenContactNotFound_Returns_False()
     {
-        var contactService = new ContactService(logger, unitOfWork, contactRepository);
         var contact = fixture.Create<Contact>();
 
         contactRepository.GetByIdAsync(contact.Id)

@@ -3,7 +3,6 @@ using ContactManagement.Api.Controllers;
 using ContactManagement.Application.Dtos;
 using ContactManagement.Application.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Shared.Api.Common;
 using Shared.Common;
@@ -11,13 +10,13 @@ namespace ContactManagement.Api.Tests;
 
 public class ContactsControllerTests
 {
-    private readonly ILogger<ContactsController> logger;
     private readonly IContactService contactService;
     private readonly Fixture fixture;
+    private readonly ContactsController contactsController;
     public ContactsControllerTests()
     {
-        logger = Substitute.For<ILogger<ContactsController>>();
         contactService = Substitute.For<IContactService>();
+        contactsController = new ContactsController(contactService);
         fixture = new Fixture();
     }
     [Fact]
@@ -30,8 +29,6 @@ public class ContactsControllerTests
 
         contactService.CreateContactAsync(contactRequest)
             .Returns(response);
-
-        var contactsController = new ContactsController(contactService);
 
         ActionResult<ApiResponse<ContactCreateResponse>> result = await contactsController.CreateContactAsync(contactRequest);
 
@@ -48,8 +45,6 @@ public class ContactsControllerTests
         contactService.CreateContactAsync(contactRequest)
             .Returns(response);
 
-        var contactsController = new ContactsController(contactService);
-
         ActionResult<ApiResponse<ContactCreateResponse>> result = await contactsController.CreateContactAsync(contactRequest);
 
         Assert.IsType<BadRequestObjectResult>(result.Result);
@@ -65,8 +60,6 @@ public class ContactsControllerTests
         contactService.GetContactsAsync()
             .Returns(contacts);
 
-        var contactsController = new ContactsController(contactService);
-
         ActionResult<ApiResponse<List<GetContactResponse>>> result = await contactsController.GetContactsAsync();   
 
         Assert.IsType<OkObjectResult>(result.Result);
@@ -79,8 +72,6 @@ public class ContactsControllerTests
 
         contactService.GetContactsAsync()
             .Returns(contacts);
-
-        var contactsController = new ContactsController(contactService);
 
         ActionResult<ApiResponse<List<GetContactResponse>>> result = await contactsController.GetContactsAsync();
 
@@ -96,8 +87,6 @@ public class ContactsControllerTests
         contactService.GetContactByIdAsync(contact.Id)
             .Returns(contactResponse);
 
-        var contactsController = new ContactsController(contactService);
-
         ActionResult<ApiResponse<GetContactResponse>> result = await contactsController.GetContactAsync(contact.Id);
 
         Assert.IsType<OkObjectResult>(result.Result);
@@ -112,8 +101,6 @@ public class ContactsControllerTests
         contactService.GetContactByIdAsync(contact.Id)
             .Returns(contactResponse);
 
-        var contactsController = new ContactsController(contactService);
-
         ActionResult<ApiResponse<GetContactResponse>> result = await contactsController.GetContactAsync(contact.Id);
 
         Assert.IsType<NotFoundObjectResult>(result.Result);
@@ -127,7 +114,6 @@ public class ContactsControllerTests
         contactService.DeleteContactAsync(contactId)
             .Returns(response);
 
-        var contactsController = new ContactsController(contactService);
         ActionResult<ApiResponse<bool>> result = await contactsController.DeleteContactAsync(contactId);
         Assert.IsType<OkObjectResult>(result.Result);
     }
@@ -140,7 +126,6 @@ public class ContactsControllerTests
         contactService.DeleteContactAsync(contactId)
             .Returns(response);
 
-        var contactsController = new ContactsController(contactService);
         ActionResult<ApiResponse<bool>> result = await contactsController.DeleteContactAsync(contactId);
         Assert.IsType<NotFoundObjectResult>(result.Result);
     }

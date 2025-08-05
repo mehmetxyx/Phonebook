@@ -62,7 +62,7 @@ public class ContactRepositoryTests
     [Fact]
     public async Task GetByIdAsync_WhenContactExists_Returns_Contact()
     {
-        var contact = fixture.Build<ContactEntity>().Create();
+        var contact = fixture.Create<ContactEntity>();
 
         await context.Contacts.AddAsync(contact);
         await context.SaveChangesAsync();
@@ -85,7 +85,7 @@ public class ContactRepositoryTests
     [Fact] 
     public async Task DeleteAsync_WhenContactExists_DeletesContact()
     {
-        var contact = fixture.Build<ContactEntity>().Create();
+        var contact = fixture.Create<ContactEntity>();
 
         await context.Contacts.AddAsync(contact);
         await context.SaveChangesAsync();
@@ -100,7 +100,7 @@ public class ContactRepositoryTests
     [Fact]
     public async Task DeleteAsync_WhenContactIsDetached_DeletesSuccessfully()
     {
-        var contact = fixture.Build<ContactEntity>().Create();
+        var contact = fixture.Create<ContactEntity>();
         await context.Contacts.AddAsync(contact);
         await context.SaveChangesAsync();
 

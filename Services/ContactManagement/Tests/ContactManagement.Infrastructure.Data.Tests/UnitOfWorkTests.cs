@@ -8,6 +8,7 @@ public class UnitOfWorkTests
 {
     private readonly ContactManagementDbContext context;
     private readonly Fixture fixture;
+    private readonly UnitOfWork unitOfWork;
     public UnitOfWorkTests()
     {
         var options = new DbContextOptionsBuilder<ContactManagementDbContext>()
@@ -15,14 +16,15 @@ public class UnitOfWorkTests
             .Options;
 
         context = new ContactManagementDbContext(options);
+        unitOfWork = new UnitOfWork(context);
+
         fixture = new Fixture();
     }
 
     [Fact]
     public async Task SaveAsync_WhenSuccessful_SavesContactEntity()
     {
-        var unitOfWork = new UnitOfWork(context);
-        var entity = fixture.Build<ContactEntity>().Create();
+        var entity = fixture.Create<ContactEntity>();
 
         await context.Contacts.AddAsync(entity);
 
@@ -37,9 +39,7 @@ public class UnitOfWorkTests
     [Fact]
     public async Task SaveAsync_WhenOperationFails_Throws_Exception()
     {
-        var unitOfWork = new UnitOfWork(context);
-
-        var entity = fixture.Build<ContactEntity>().Create();
+        var entity = fixture.Create<ContactEntity>();
         entity.Name = null; // Invalid entity (Name is required)
 
         await context.Contacts.AddAsync(entity);

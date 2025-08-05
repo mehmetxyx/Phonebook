@@ -20,7 +20,7 @@ public class ContactsController : ControllerBase
     {
         var result = await contactService.CreateContactAsync(request);
         if(result.IsSuccess)
-            return CreatedAtAction(nameof(CreateContactAsync), new { id = result.Value.Id }, result.ToApiResponse());   
+            return CreatedAtAction(nameof(CreateContactAsync), new { id = result?.Value?.Id }, result?.ToApiResponse());   
 
         return BadRequest(result.ToApiResponse());
     }
