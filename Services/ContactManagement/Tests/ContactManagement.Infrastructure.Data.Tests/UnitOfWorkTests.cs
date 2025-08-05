@@ -37,13 +37,19 @@ public class UnitOfWorkTests
     }
 
     [Fact]
-    public async Task SaveAsync_WhenOperationFails_Throws_Exception()
+    public async Task SaveAsync_WhenOperationFails_Throws_ArgumentException()
     {
-        var entity = fixture.Create<ContactEntity>();
-        entity.Name = null; // Invalid entity (Name is required)
+        var contactId = Guid.NewGuid();
+        var entity1 = fixture.Build<ContactEntity>().With(c => c.Id, contactId).Create();
+        var entity2 = fixture.Build<ContactEntity>().With(c => c.Id, contactId).Create();
 
-        await context.Contacts.AddAsync(entity);
+        await context.Contacts.AddAsync(entity1);
+        await unitOfWork.SaveAsync();
 
-        await Assert.ThrowsAsync<DbUpdateException>(unitOfWork.SaveAsync);    
+        // Detach the first entity to simulate a conflict
+        context.Entry(entity1).State = EntityState.Detached;
+        await context.Contacts.AddAsync(entity2);
+
+        await Assert.ThrowsAsync<ArgumentException>(unitOfWork.SaveAsync);    
     }
 }
