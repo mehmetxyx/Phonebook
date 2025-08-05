@@ -25,7 +25,7 @@ public class ContactService: IContactService
         {
             var contact = request.ToDomain();
             await contactRepository.AddAsync(contact);
-            unitOfWork.SaveAsync();
+            await unitOfWork.SaveAsync();
 
             return Result<ContactCreateResponse>.Success(contact.ToContactCreateResponse());
         }
@@ -45,8 +45,8 @@ public class ContactService: IContactService
             if(contact == null)
                 return Result<bool>.Failure("Contact not found");
 
-            await contactRepository.DeleteAsync(contact);
-            unitOfWork.SaveAsync();
+            contactRepository.Delete(contact);
+            await unitOfWork.SaveAsync();
             
             logger.LogInformation("Contact with ID {ContactId} deleted successfully", contactId);
             return Result<bool>.Success(true);

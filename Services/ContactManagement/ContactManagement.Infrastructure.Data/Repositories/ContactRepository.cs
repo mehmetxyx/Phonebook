@@ -24,8 +24,12 @@ public class ContactRepository: IContactRepository
 
     public async Task<List<Contact>> GetAllAsync()
     {
-        var contacts = await context.Contacts.ToListAsync();
-        return contacts.Select(c => c.ToDomain()).ToList();
+        var contacts = await context.Contacts
+            .ToListAsync();
+        
+        return contacts
+            .Select(c => c.ToDomain())
+            .ToList();
     }
 
     public async Task<Contact?> GetByIdAsync(Guid contactId)
@@ -40,12 +44,21 @@ public class ContactRepository: IContactRepository
         return entity.ToDomain();
     }
 
-    public async Task DeleteAsync(Contact contact)
+    public void Delete(Contact contact)
     {
-        var entity = await context.Contacts.FirstOrDefaultAsync(c => c.Id == contact.Id);
-        if(entity is null)
-            throw new KeyNotFoundException($"Contact with ID {contact.Id} not found");
-        
-        context.Contacts.Remove(entity);
+        var trackedEntity = context.ChangeTracker.Entries<ContactEntity>()
+            .FirstOrDefault(e => e.Entity.Id == contact.Id);
+
+        if(trackedEntity is not null)
+        {
+            trackedEntity.State = EntityState.Deleted;
+            return;
+        }
+
+        var entity = contact.ToEntity();
+
+        context.Contacts.Attach(entity);
+
+        context.Entry(entity).State = EntityState.Deleted;
     }
 }

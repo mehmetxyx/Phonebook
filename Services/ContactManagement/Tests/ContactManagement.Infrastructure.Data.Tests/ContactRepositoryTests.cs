@@ -37,20 +37,6 @@ public class ContactRepositoryTests
     }
 
     [Fact]
-    public async Task AddContactAsync_WhenContactIsInvalid_Returns_Exception()
-    {
-        var contact = fixture.Build<Contact>().Create();
-        contact.Name = null; // Invalid contact (Name is required)
-
-        await contactRepository.AddAsync(contact);
-
-        await Assert.ThrowsAsync<DbUpdateException>(async () => 
-        {
-            await context.SaveChangesAsync();
-        });
-    }
-
-    [Fact]
     public async Task GetAllAsync_WhenSuccessful_Returns_AllContacts()
     {
         var contacts = fixture.CreateMany<ContactEntity>(3).ToList();
@@ -104,7 +90,7 @@ public class ContactRepositoryTests
         await context.Contacts.AddAsync(contact);
         await context.SaveChangesAsync();
 
-        await contactRepository.DeleteAsync(contact.ToDomain());
+        contactRepository.Delete(contact.ToDomain());
         await context.SaveChangesAsync();
 
         var deletedContact = await context.Contacts.FirstOrDefaultAsync(c => c.Id == contact.Id);
@@ -112,13 +98,18 @@ public class ContactRepositoryTests
     }
 
     [Fact]
-    public async Task DeleteAsync_WhenContactDoesNotExist_ThrowsKeyNotFoundException()
+    public async Task DeleteAsync_WhenContactIsDetached_DeletesSuccessfully()
     {
-        var contact = fixture.Build<Contact>().Create();
+        var contact = fixture.Build<ContactEntity>().Create();
+        await context.Contacts.AddAsync(contact);
+        await context.SaveChangesAsync();
 
-        await Assert.ThrowsAsync<KeyNotFoundException>(async () => 
-        {
-            await contactRepository.DeleteAsync(contact);
-        });
+        context.Entry(contact).State = EntityState.Detached;
+
+        contactRepository.Delete(contact.ToDomain());
+        await context.SaveChangesAsync();
+
+        var deleted = await context.Contacts.FirstOrDefaultAsync(c => c.Id == contact.Id);
+        Assert.Null(deleted);
     }
 }

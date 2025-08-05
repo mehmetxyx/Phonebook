@@ -28,10 +28,10 @@ public class UnitOfWorkTests
 
         await unitOfWork.SaveAsync();
 
-        var savedEntity = context.Contacts.FirstOrDefaultAsync(c => c.Id == entity.Id);
+        var savedEntity = await context.Contacts.FirstOrDefaultAsync(c => c.Id == entity.Id);
 
         Assert.NotNull(savedEntity);
-        Assert.Equal(entity.Id, savedEntity.Result.Id);
+        Assert.Equal(entity.Id, savedEntity.Id);
     }
 
     [Fact]

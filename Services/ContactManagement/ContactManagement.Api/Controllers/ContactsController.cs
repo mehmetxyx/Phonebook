@@ -8,10 +8,9 @@ namespace ContactManagement.Api.Controllers;
 [Route("api/contacts")]
 public class ContactsController : ControllerBase
 {
-    private readonly ILogger<ContactsController> _logger;
     private IContactService contactService;
 
-    public ContactsController(ILogger<ContactsController> logger, IContactService contactService)
+    public ContactsController(IContactService contactService)
     {
         this.contactService = contactService;
     }
