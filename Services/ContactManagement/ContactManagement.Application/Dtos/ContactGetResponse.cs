@@ -1,6 +1,6 @@
 ﻿namespace ContactManagement.Application.Dtos;
 
-public class GetContactResponse
+public class ContactGetResponse
 {
     public required Guid Id { get; set; }
     public required string Name { get; set; }

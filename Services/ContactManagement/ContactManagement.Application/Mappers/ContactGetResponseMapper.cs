@@ -1,10 +1,10 @@
 ﻿namespace ContactManagement.Application.Dtos;
 
-public static class GetContactResponseMapper
+public static class ContactGetResponseMapper
 {
-    public static GetContactResponse ToGetContactResponse(this Domain.Entities.Contact contact)
+    public static ContactGetResponse ToGetContactResponse(this Domain.Entities.Contact contact)
     {
-        return new GetContactResponse
+        return new ContactGetResponse
         {
             Id = contact.Id,
             Name = contact.Name,

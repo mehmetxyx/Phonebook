@@ -59,7 +59,7 @@ public class ContactService: IContactService
         return Result<bool>.Failure("Failed to delete contact");
     }
 
-    public async Task<Result<GetContactResponse>> GetContactByIdAsync(Guid contactId)
+    public async Task<Result<ContactGetResponse>> GetContactByIdAsync(Guid contactId)
     {
         try
         {
@@ -68,20 +68,20 @@ public class ContactService: IContactService
             if(contact is null)
             {
                 logger.LogWarning("Contact with ID {ContactId} not found", contactId);
-                return Result<GetContactResponse>.Failure("Contact not found");
+                return Result<ContactGetResponse>.Failure("Contact not found");
             }
 
-            return Result<GetContactResponse>.Success(contact.ToGetContactResponse());
+            return Result<ContactGetResponse>.Success(contact.ToGetContactResponse());
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Error retrieving contact by ID {ContactId}", contactId);
         }
 
-        return Result<GetContactResponse>.Failure("Failed to retrieve contact");
+        return Result<ContactGetResponse>.Failure("Failed to retrieve contact");
     }
 
-    public async Task<Result<List<GetContactResponse>>> GetContactsAsync()
+    public async Task<Result<List<ContactGetResponse>>> GetContactsAsync()
     {
         try
         {
@@ -91,13 +91,13 @@ public class ContactService: IContactService
                 .Select(c => c.ToGetContactResponse())
                 .ToList();
 
-            return Result<List<GetContactResponse>>.Success(responses);
+            return Result<List<ContactGetResponse>>.Success(responses);
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Error retrieving contacts");
         }
      
-        return Result<List<GetContactResponse>>.Failure("Failed to retrieve contacts");
+        return Result<List<ContactGetResponse>>.Failure("Failed to retrieve contacts");
     }
 }

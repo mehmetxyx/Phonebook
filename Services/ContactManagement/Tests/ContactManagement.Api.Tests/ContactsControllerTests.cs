@@ -53,14 +53,14 @@ public class ContactsControllerTests
     [Fact]
     public async Task GetContactsAsync_WhenSuccessful_Returns_AllContacts()
     {
-        var contactResponse = fixture.CreateMany<GetContactResponse>(3).ToList();
+        var contactResponse = fixture.CreateMany<ContactGetResponse>(3).ToList();
 
-        var contacts = Result<List<GetContactResponse>>.Success(contactResponse);
+        var contacts = Result<List<ContactGetResponse>>.Success(contactResponse);
 
         contactService.GetContactsAsync()
             .Returns(contacts);
 
-        ActionResult<ApiResponse<List<GetContactResponse>>> result = await contactsController.GetContactsAsync();   
+        ActionResult<ApiResponse<List<ContactGetResponse>>> result = await contactsController.GetContactsAsync();   
 
         Assert.IsType<OkObjectResult>(result.Result);
     }
@@ -68,40 +68,40 @@ public class ContactsControllerTests
     [Fact]
     public async Task GetContactsAsync_WhenFailed_Returns_Returns_BadRequest()
     {
-        var contacts = Result<List<GetContactResponse>>.Failure("no cntacts found");
+        var contacts = Result<List<ContactGetResponse>>.Failure("no cntacts found");
 
         contactService.GetContactsAsync()
             .Returns(contacts);
 
-        ActionResult<ApiResponse<List<GetContactResponse>>> result = await contactsController.GetContactsAsync();
+        ActionResult<ApiResponse<List<ContactGetResponse>>> result = await contactsController.GetContactsAsync();
 
         Assert.IsType<NotFoundObjectResult>(result.Result);
     }
 
     [Fact]
-    public async Task GetContactAsync_WhenSuccessful_Returns_Contact()
+    public async Task GetContactByIdAsync_WhenSuccessful_Returns_Contact()
     {
-        var contact = fixture.Create<GetContactResponse>();
-        var contactResponse = Result<GetContactResponse>.Success(contact);
+        var contact = fixture.Create<ContactGetResponse>();
+        var contactResponse = Result<ContactGetResponse>.Success(contact);
 
         contactService.GetContactByIdAsync(contact.Id)
             .Returns(contactResponse);
 
-        ActionResult<ApiResponse<GetContactResponse>> result = await contactsController.GetContactAsync(contact.Id);
+        ActionResult<ApiResponse<ContactGetResponse>> result = await contactsController.GetContactByIdAsync(contact.Id);
 
         Assert.IsType<OkObjectResult>(result.Result);
     }
 
     [Fact]
-    public async Task GetContactAsync_WhenFailed_Returns_Notfound()
+    public async Task GetContactByIdAsync_WhenFailed_Returns_Notfound()
     {
-        var contact = fixture.Create<GetContactResponse>();
-        var contactResponse = Result<GetContactResponse>.Failure("Contact not found!");
+        var contact = fixture.Create<ContactGetResponse>();
+        var contactResponse = Result<ContactGetResponse>.Failure("Contact not found!");
 
         contactService.GetContactByIdAsync(contact.Id)
             .Returns(contactResponse);
 
-        ActionResult<ApiResponse<GetContactResponse>> result = await contactsController.GetContactAsync(contact.Id);
+        ActionResult<ApiResponse<ContactGetResponse>> result = await contactsController.GetContactByIdAsync(contact.Id);
 
         Assert.IsType<NotFoundObjectResult>(result.Result);
     }

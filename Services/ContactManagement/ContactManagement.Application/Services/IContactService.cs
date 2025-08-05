@@ -6,7 +6,7 @@ namespace ContactManagement.Application.Services;
 public interface IContactService
 {
     Task<Result<ContactCreateResponse>> CreateContactAsync(ContactCreateRequest request);
-    Task<Result<GetContactResponse>> GetContactByIdAsync(Guid contactId);
-    Task<Result<List<GetContactResponse>>> GetContactsAsync();
+    Task<Result<ContactGetResponse>> GetContactByIdAsync(Guid contactId);
+    Task<Result<List<ContactGetResponse>>> GetContactsAsync();
     Task<Result<bool>> DeleteContactAsync(Guid contactId);
 }
