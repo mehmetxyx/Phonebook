@@ -11,4 +11,5 @@ public class ContactManagementDbContext: DbContext
     }
 
     public DbSet<ContactEntity> Contacts { get; set; }
+    public DbSet<ContactDetailEntity> ContactDetails { get; set; }
 }

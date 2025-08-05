@@ -2,8 +2,8 @@
 
 public class GetContactResponse
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public string Surname { get; set; }
-    public string Company { get; set; }
+    public required Guid Id { get; set; }
+    public required string Name { get; set; }
+    public required string Surname { get; set; }
+    public required string Company { get; set; }
 }
