@@ -1,6 +1,22 @@
-@ContactManagement.Api_HostAddress = http://localhost:5074/api/contacts
+@ContactManagement.Api_HostAddress = http://localhost:5074/api
 
-GET {{ContactManagement.Api_HostAddress}}
+GET {{ContactManagement.Api_HostAddress}}/contacts
 Accept: application/json
 
 ###
+POST {{ContactManagement.Api_HostAddress}}/contacts
+Content-Type: application/json
+
+{
+    "name": "Mehmet",
+    "surname": "yildiz",
+    "company" : "Koç Sistem"
+}
+
+###
+@contactid=47e6f376-9f80-479e-baef-229b7e6b97cf
+GET {{ContactManagement.Api_HostAddress}}/contacts/{{contactid}}
+Accept: application/json
+
+###
+DELETE {{ContactManagement.Api_HostAddress}}/contacts/{{contactid}}

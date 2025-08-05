@@ -8,13 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.Api.Common\Shared.Api.Common.csproj" />
     <ProjectReference Include="..\..\..\Shared\Shared.Common\Shared.Common.csproj" />
     <ProjectReference Include="..\ContactManagement.Application\ContactManagement.Application.csproj" />
-    <ProjectReference Include="..\ContactManagement.Domain\ContactManagement.Domain.csproj" />
+    <ProjectReference Include="..\ContactManagement.Infrastructure.Data\ContactManagement.Infrastructure.Data.csproj" />
   </ItemGroup>
 
 </Project>
