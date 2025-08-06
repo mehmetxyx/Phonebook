@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using ReportManagement.Application.Dtos;
+using ReportManagement.Application.Interfaces;
 using ReportManagement.Application.Services;
 using ReportManagement.Domain.Entities;
 using ReportManagement.Domain.Repositories;
@@ -12,15 +13,17 @@ namespace ReportManagement.Application.Tests;
 public class ReportServiceTests
 {
     private readonly IReportRepository reportRepository;
+    private readonly IUnitOfWork unitOfWork;
     private readonly ReportService reportService;
     private readonly Fixture fixture;
     private readonly ILogger<ReportService> logger;
 
     public ReportServiceTests()
     {
+        unitOfWork = Substitute.For<IUnitOfWork>();
         reportRepository = Substitute.For<IReportRepository>();
         logger = Substitute.For<ILogger<ReportService>>();
-        reportService = new ReportService(logger, reportRepository);
+        reportService = new ReportService(logger, unitOfWork, reportRepository);
         fixture = new Fixture();
     }
     [Fact]
