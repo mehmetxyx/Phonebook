@@ -1,6 +1,14 @@
-@report.api = http://localhost:5012/reports
+@report.api = http://localhost:5012/api/reports
 
-GET {{@report.api}}
-Accept: application/json
+### create report
+POST {{report.api}}
 
-###
+### get all reports
+GET {{report.api}}
+
+### get report by id
+@report.id = a258b229-84d7-46b8-82c2-5f891550c6ab
+GET {{report.api}}/{{report.id}}
+
+### get report data
+GET {{report.api}}/{{report.id}}/data

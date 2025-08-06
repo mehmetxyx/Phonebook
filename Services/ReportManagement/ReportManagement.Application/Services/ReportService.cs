@@ -1,21 +1,23 @@
 ﻿using Microsoft.Extensions.Logging;
 using ReportManagement.Application.Dtos;
+using ReportManagement.Application.Interfaces;
 using ReportManagement.Application.Mappers;
-using ReportManagement.Application.Services;
 using ReportManagement.Domain.Entities;
 using ReportManagement.Domain.Enums;
 using ReportManagement.Domain.Repositories;
 using Shared.Common;
 
-namespace ReportManagement.Application;
+namespace ReportManagement.Application.Services;
 public class ReportService: IReportService
 {
     private readonly ILogger<ReportService> logger;
+    private readonly IUnitOfWork unitOfWork;
     private IReportRepository reportRepository;
 
-    public ReportService(ILogger<ReportService> logger, IReportRepository reportRepository)
+    public ReportService(ILogger<ReportService> logger, IUnitOfWork unitOfWork, IReportRepository reportRepository)
     {
         this.logger = logger;
+        this.unitOfWork = unitOfWork;
         this.reportRepository = reportRepository;
     }
 
@@ -31,6 +33,7 @@ public class ReportService: IReportService
             };
 
             await reportRepository.AddAsync(report);
+            await unitOfWork.SaveAsync();
 
             return Result<ReportResponse>.Success(report.ToReportResponse());
         }

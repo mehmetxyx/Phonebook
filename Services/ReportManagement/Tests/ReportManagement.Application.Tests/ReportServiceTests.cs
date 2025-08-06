@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using ReportManagement.Application.Dtos;
+using ReportManagement.Application.Services;
 using ReportManagement.Domain.Entities;
 using ReportManagement.Domain.Repositories;
 using Shared.Common;
