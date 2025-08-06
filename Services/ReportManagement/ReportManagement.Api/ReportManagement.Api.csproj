@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shared.Api.Common\Shared.Api.Common.csproj" />
     <ProjectReference Include="..\ReportManagement.Application\ReportManagement.Application.csproj" />
     <ProjectReference Include="..\ReportManagement.Infrastructure.Data\ReportManagement.Infrastructure.Data.csproj" />
   </ItemGroup>
