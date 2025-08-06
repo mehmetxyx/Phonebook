@@ -12,4 +12,5 @@ public class ReportManagementDbContext: DbContext
 	}
 
     public DbSet<ReportEntity> Reports { get; set; }
+    public DbSet<ReportDataEntity> ReportData { get; set; }
 }
