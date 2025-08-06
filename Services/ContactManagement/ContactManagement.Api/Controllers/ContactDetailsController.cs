@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shared.Api.Common;
 
 namespace ContactManagement.Api.Controllers;
-[Route("api/contacts/{contactId}/contact-details")]
+[Route("api/contacts/{contactId}/details")]
 [ApiController]
 public class ContactDetailsController : ControllerBase
 {

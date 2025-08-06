@@ -14,7 +14,7 @@ builder.Services.AddControllers(options =>
 
 builder.Services.AddOpenApi();
 builder.Services.AddApplicationServices();
-builder.Services.AddContactManagementInfrastructureData(builder.Configuration, builder.Environment.IsDevelopment());
+builder.Services.AddInfrastructureData(builder.Configuration, builder.Environment.IsDevelopment());
 
 var app = builder.Build();
 

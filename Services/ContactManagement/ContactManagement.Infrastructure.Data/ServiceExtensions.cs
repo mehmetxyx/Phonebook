@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 namespace ContactManagement.Infrastructure.Data;
 public static class ServiceExtensions
 {
-    public static void AddContactManagementInfrastructureData(this IServiceCollection serviceCollection, IConfiguration configuration, bool logSensitiveAndDetailedLogs)
+    public static void AddInfrastructureData(this IServiceCollection serviceCollection, IConfiguration configuration, bool logSensitiveAndDetailedLogs)
     {
         serviceCollection.AddDbContext<ContactManagementDbContext>(optionsBuilder =>
         {

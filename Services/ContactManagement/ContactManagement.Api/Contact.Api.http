@@ -16,7 +16,7 @@ Accept: application/json
 
 
 ### Get contact
-@contactid=2a4b4405-eb64-450e-b06e-d80e414ff376
+@contactid=0662534e-11f1-4e49-bc22-b915bbf7291d
 GET {{contacts.api}}/{{contactid}}
 Accept: application/json
 
@@ -24,18 +24,18 @@ Accept: application/json
 DELETE {{contacts.api}}/{{contactid}}
 
 ### create contact detail
-POST {{contacts.api}}/{{contactid}}/contact-details
+POST {{contacts.api}}/{{contactid}}/details
 Content-Type: application/json
 
 {
     "type": "Email",
-    "value": "aa@g.com"
+    "value": "aa@g.comxx"
 }
 
 ### get all contact details
-GET {{contacts.api}}/{{contactid}}/contact-details
+GET {{contacts.api}}/{{contactid}}/details
 Accept: application/json
 
 ### delete contact details
-@contact.details.id=3f750e5d-93c0-4483-9ad4-41fe5b50f583
-DELETE {{contacts.api}}/{{contactid}}/contact-details/{{contact.details.id}}
+@contact.details.id=12b466f9-7414-46c1-a3e5-76304e5acef8
+DELETE {{contacts.api}}/{{contactid}}/details/{{contact.details.id}}
