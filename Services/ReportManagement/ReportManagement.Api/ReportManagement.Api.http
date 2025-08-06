@@ -1,0 +1,6 @@
+@report.api = http://localhost:5012/reports
+
+GET {{@report.api}}
+Accept: application/json
+
+###
