@@ -41,6 +41,7 @@ public class ReportRepositoryTests
     public async Task GetAllAsync_WhenSuccessful_Returns_AllReports()
     {
         var reportEntities = fixture.Build<ReportEntity>()
+            .Without(r => r.ReportData)
             .CreateMany(3)
             .ToList();
 
@@ -64,7 +65,9 @@ public class ReportRepositoryTests
     [Fact]
     public async Task GetByIdAsync_WhenReportExists_Returns_Report()
     {
-        var report = fixture.Build<ReportEntity>().Create();
+        var report = fixture.Build<ReportEntity>()
+            .Without(r => r.ReportData)
+            .Create();
         
         await context.Reports.AddAsync(report);
         await context.SaveChangesAsync();

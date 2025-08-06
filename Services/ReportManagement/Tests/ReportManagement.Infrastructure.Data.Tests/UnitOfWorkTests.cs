@@ -26,6 +26,7 @@ public class UnitOfWorkTests
     public async Task SaveAsync_WhenSuccessful_SavesReportEntity()
     {
         var entity = fixture.Build<ReportEntity>()
+            .Without(c => c.ReportData)
             .Create();
 
         await context.Reports.AddAsync(entity);
@@ -43,10 +44,12 @@ public class UnitOfWorkTests
     {
         var ReportId = Guid.NewGuid();
         var entity1 = fixture.Build<ReportEntity>()
+            .Without(c => c.ReportData)
             .With(c => c.Id, ReportId)
             .Create();
 
         var entity2 = fixture.Build<ReportEntity>()
+            .Without(c => c.ReportData)
             .With(c => c.Id, ReportId)
             .Create();
 

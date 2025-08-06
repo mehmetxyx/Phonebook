@@ -26,6 +26,7 @@ public class ReportDataRepositoryTests
     public async Task GetAllAsync_WhenSuccessful_Returns_AllReports()
     {
         var reportDataEntities = fixture.Build<ReportDataEntity>()
+            .Without(r => r.Report)
             .CreateMany(3)
             .ToList();
 
