@@ -1,22 +1,41 @@
-@ContactManagement.Api_HostAddress = http://localhost:5074/api
+@contacts.api = http://localhost:5074/api/contacts
 
-GET {{ContactManagement.Api_HostAddress}}/contacts
-Accept: application/json
-
-###
-POST {{ContactManagement.Api_HostAddress}}/contacts
+### create contact
+POST {{contacts.api}}
 Content-Type: application/json
 
 {
-    "name": "Mehmet",
-    "surname": "yildiz",
-    "company" : "Koç Sistem"
+    "name": "Evdile",
+    "surname": "yildiz2",
+    "company" : "Zila"
 }
 
-###
-@contactid=47e6f376-9f80-479e-baef-229b7e6b97cf
-GET {{ContactManagement.Api_HostAddress}}/contacts/{{contactid}}
+### Get all contacts
+GET {{contacts.api}}
 Accept: application/json
 
-###
-DELETE {{ContactManagement.Api_HostAddress}}/contacts/{{contactid}}
+
+### Get contact
+@contactid=2a4b4405-eb64-450e-b06e-d80e414ff376
+GET {{contacts.api}}/{{contactid}}
+Accept: application/json
+
+### delete contact
+DELETE {{contacts.api}}/{{contactid}}
+
+### create contact detail
+POST {{contacts.api}}/{{contactid}}/contact-details
+Content-Type: application/json
+
+{
+    "type": "Email",
+    "value": "aa@g.com"
+}
+
+### get all contact details
+GET {{contacts.api}}/{{contactid}}/contact-details
+Accept: application/json
+
+### delete contact details
+@contact.details.id=3f750e5d-93c0-4483-9ad4-41fe5b50f583
+DELETE {{contacts.api}}/{{contactid}}/contact-details/{{contact.details.id}}

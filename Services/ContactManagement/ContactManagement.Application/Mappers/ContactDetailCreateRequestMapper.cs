@@ -5,12 +5,12 @@ namespace ContactManagement.Application.Mappers;
 
 public static class ContactDetailCreateRequestMapper
 {
-    public static ContactDetail ToDomain(this ContactDetailCreateRequest request)
+    public static ContactDetail ToDomain(this ContactDetailCreateRequest request, Guid  contactId)
     {
         return new ContactDetail
         {
             Id = Guid.NewGuid(),
-            ContactId = request.ContactId,
+            ContactId = contactId,
             Type = request.Type,
             Value = request.Value
         };

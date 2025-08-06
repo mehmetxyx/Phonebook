@@ -24,7 +24,9 @@ public class UnitOfWorkTests
     [Fact]
     public async Task SaveAsync_WhenSuccessful_SavesContactEntity()
     {
-        var entity = fixture.Create<ContactEntity>();
+        var entity = fixture.Build<ContactEntity>()
+            .Without(c => c.ContactDetails)
+            .Create();
 
         await context.Contacts.AddAsync(entity);
 
@@ -40,8 +42,15 @@ public class UnitOfWorkTests
     public async Task SaveAsync_WhenOperationFails_Throws_ArgumentException()
     {
         var contactId = Guid.NewGuid();
-        var entity1 = fixture.Build<ContactEntity>().With(c => c.Id, contactId).Create();
-        var entity2 = fixture.Build<ContactEntity>().With(c => c.Id, contactId).Create();
+        var entity1 = fixture.Build<ContactEntity>()
+            .With(c => c.Id, contactId)
+            .Without(c => c.ContactDetails)
+            .Create();
+
+        var entity2 = fixture.Build<ContactEntity>()
+            .With(c => c.Id, contactId)
+            .Without(c => c.ContactDetails)
+            .Create();
 
         await context.Contacts.AddAsync(entity1);
         await unitOfWork.SaveAsync();

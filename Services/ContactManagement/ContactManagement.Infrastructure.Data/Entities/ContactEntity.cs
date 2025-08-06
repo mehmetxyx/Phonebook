@@ -6,4 +6,5 @@ public class ContactEntity
     public required string Name { get; set; }
     public required string Surname { get; set; }
     public required string Company { get; set; }
+    public List<ContactDetailEntity>? ContactDetails { get; set; } = new List<ContactDetailEntity>();
 }

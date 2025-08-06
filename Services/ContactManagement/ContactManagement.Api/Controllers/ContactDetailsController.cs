@@ -17,7 +17,7 @@ public class ContactDetailsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<ApiResponse<ContactDetailCreateResponse>>> ContactDetailCreateAsync(Guid contactId, ContactDetailCreateRequest createRequest)
+    public async Task<ActionResult<ApiResponse<ContactDetailCreateResponse>>> ContactDetailCreateAsync(Guid contactId, [FromBody] ContactDetailCreateRequest createRequest)
     {
         var result = await contactDetailService.CreateContactDetailAsync(contactId, createRequest);
 
@@ -47,7 +47,7 @@ public class ContactDetailsController : ControllerBase
         return NotFound(result.ToApiResponse());
     }
 
-    [HttpPut("{contactDetailId}")]
+    [HttpDelete("{contactDetailId}")]
     public async Task<ActionResult<ApiResponse<bool>>> DeleteContactDetailAsync(Guid contactId, Guid contactDetailId)
     {
         var result = await contactDetailService.DeleteContactDetailAsync(contactId, contactDetailId);

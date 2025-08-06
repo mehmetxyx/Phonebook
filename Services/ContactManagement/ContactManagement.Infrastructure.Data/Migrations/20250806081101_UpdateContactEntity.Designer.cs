@@ -3,6 +3,7 @@ using System;
 using ContactManagement.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ContactManagement.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ContactManagementDbContext))]
-    partial class ContactManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250806081101_UpdateContactEntity")]
+    partial class UpdateContactEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,28 +36,17 @@ namespace ContactManagement.Infrastructure.Data.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("contact_id");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
                         .HasColumnName("type");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
+                        .HasColumnType("text")
                         .HasColumnName("value");
 
                     b.HasKey("Id")
                         .HasName("pk_contact_details");
-
-                    b.HasIndex("Id")
-                        .IsUnique()
-                        .HasDatabaseName("ix_contact_details_id");
-
-                    b.HasIndex("ContactId", "Id")
-                        .IsUnique()
-                        .HasDatabaseName("ix_contact_details_contact_id_id");
 
                     b.ToTable("contact_details", (string)null);
                 });
@@ -87,28 +79,7 @@ namespace ContactManagement.Infrastructure.Data.Migrations
                     b.HasKey("Id")
                         .HasName("pk_contacts");
 
-                    b.HasIndex("Id")
-                        .IsUnique()
-                        .HasDatabaseName("ix_contacts_id");
-
                     b.ToTable("contacts", (string)null);
-                });
-
-            modelBuilder.Entity("ContactManagement.Infrastructure.Data.Entities.ContactDetailEntity", b =>
-                {
-                    b.HasOne("ContactManagement.Infrastructure.Data.Entities.ContactEntity", "Contact")
-                        .WithMany("ContactDetails")
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("fk_contact_details_contacts_contact_id");
-
-                    b.Navigation("Contact");
-                });
-
-            modelBuilder.Entity("ContactManagement.Infrastructure.Data.Entities.ContactEntity", b =>
-                {
-                    b.Navigation("ContactDetails");
                 });
 #pragma warning restore 612, 618
         }

@@ -46,6 +46,7 @@ public class ContactDetailRepositoryTests
         var contactDetailEntities = fixture
             .Build<ContactDetailEntity>()
             .With(c => c.ContactId, contactId)
+            .Without(c => c.Contact)
             .CreateMany(3)
             .ToList();
         
@@ -71,6 +72,7 @@ public class ContactDetailRepositoryTests
     {
         var contactDetail = fixture.Build<ContactDetailEntity>()
             .With(c => c.ContactId, contactId)
+            .Without(c => c.Contact)
             .Create();
 
         await context.ContactDetails.AddAsync(contactDetail);
@@ -94,6 +96,7 @@ public class ContactDetailRepositoryTests
     {
         var contactDetailEntity = fixture.Build<ContactDetailEntity>()
             .With(c => c.ContactId, contactId)
+            .Without(c => c.Contact)
             .Create();
 
         await context.ContactDetails.AddAsync(contactDetailEntity);

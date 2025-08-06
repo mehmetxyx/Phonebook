@@ -24,7 +24,7 @@ public class ContactDetailService: IContactDetailService
     {
         try
         {
-            var contactDetail = request.ToDomain();
+            var contactDetail = request.ToDomain(contactId);
             
             await contactDetailRepository.AddAsync(contactDetail);
             await unitOfWork.SaveAsync();

@@ -39,7 +39,10 @@ public class ContactRepositoryTests
     [Fact]
     public async Task GetAllAsync_WhenSuccessful_Returns_AllContacts()
     {
-        var contacts = fixture.CreateMany<ContactEntity>(3).ToList();
+        var contacts = fixture.Build<ContactEntity>()
+            .Without(c => c.ContactDetails)
+            .CreateMany(3)
+            .ToList();
 
         await context.Contacts.AddRangeAsync(contacts);
         await context.SaveChangesAsync();
@@ -62,7 +65,9 @@ public class ContactRepositoryTests
     [Fact]
     public async Task GetByIdAsync_WhenContactExists_Returns_Contact()
     {
-        var contact = fixture.Create<ContactEntity>();
+        var contact = fixture.Build<ContactEntity>()
+            .Without(c => c.ContactDetails)
+            .Create();
 
         await context.Contacts.AddAsync(contact);
         await context.SaveChangesAsync();
@@ -85,7 +90,9 @@ public class ContactRepositoryTests
     [Fact] 
     public async Task DeleteAsync_WhenContactExists_DeletesContact()
     {
-        var contact = fixture.Create<ContactEntity>();
+        var contact = fixture.Build<ContactEntity>()
+            .Without(c => c.ContactDetails)
+            .Create();
 
         await context.Contacts.AddAsync(contact);
         await context.SaveChangesAsync();
@@ -100,7 +107,10 @@ public class ContactRepositoryTests
     [Fact]
     public async Task DeleteAsync_WhenContactIsDetached_DeletesSuccessfully()
     {
-        var contact = fixture.Create<ContactEntity>();
+        var contact = fixture.Build<ContactEntity>()
+            .Without(c => c.ContactDetails)
+            .Create();
+
         await context.Contacts.AddAsync(contact);
         await context.SaveChangesAsync();
 

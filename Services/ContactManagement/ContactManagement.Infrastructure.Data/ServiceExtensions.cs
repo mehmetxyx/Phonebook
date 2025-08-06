@@ -24,6 +24,7 @@ public static class ServiceExtensions
         });
         
         serviceCollection.AddScoped<IContactRepository, ContactRepository>();
+        serviceCollection.AddScoped<IContactDetailRepository, ContactDetailRepository>();
         serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

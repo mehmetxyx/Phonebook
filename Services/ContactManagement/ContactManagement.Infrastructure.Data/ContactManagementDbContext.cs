@@ -10,6 +10,12 @@ public class ContactManagementDbContext: DbContext
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ContactManagementDbContext).Assembly);
+        base.OnModelCreating(modelBuilder);
+    }
+
     public DbSet<ContactEntity> Contacts { get; set; }
     public DbSet<ContactDetailEntity> ContactDetails { get; set; }
 }
