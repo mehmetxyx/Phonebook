@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ReportManagement.Infrastructure.Data;
@@ -11,9 +12,11 @@ using ReportManagement.Infrastructure.Data;
 namespace ReportManagement.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ReportManagementDbContext))]
-    partial class ReportManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250806210826_AddReportData")]
+    partial class AddReportData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,36 +75,14 @@ namespace ReportManagement.Infrastructure.Data.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("request_date");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text")
+                    b.Property<int>("Status")
+                        .HasColumnType("integer")
                         .HasColumnName("status");
 
                     b.HasKey("Id")
                         .HasName("pk_reports");
 
-                    b.HasIndex("Id")
-                        .IsUnique()
-                        .HasDatabaseName("ix_reports_id");
-
                     b.ToTable("reports", (string)null);
-                });
-
-            modelBuilder.Entity("ReportManagement.Infrastructure.Data.Entities.ReportDataEntity", b =>
-                {
-                    b.HasOne("ReportManagement.Infrastructure.Data.Entities.ReportEntity", "Report")
-                        .WithMany("ReportData")
-                        .HasForeignKey("ReportId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("fk_report_data_reports_report_id");
-
-                    b.Navigation("Report");
-                });
-
-            modelBuilder.Entity("ReportManagement.Infrastructure.Data.Entities.ReportEntity", b =>
-                {
-                    b.Navigation("ReportData");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,5 +7,6 @@ public static class ServiceExtensions
     public static void AddApplicationServices(this IServiceCollection serviceCollection)
     {
         serviceCollection.AddScoped<IReportService, ReportService>();
+        serviceCollection.AddScoped<IReportDataService, ReportDataService>();
     }
 }

@@ -7,4 +7,5 @@ public class ReportDataEntity
     public required string Location { get; set; }
     public int ContactCount { get; set; }
     public int PhoneNumberCount { get; set; }
+    public ReportEntity? Report { get; set; }
 }

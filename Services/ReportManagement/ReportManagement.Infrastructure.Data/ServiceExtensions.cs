@@ -26,6 +26,7 @@ public static class ServiceExtensions
         });
         
         serviceCollection.AddScoped<IReportRepository, ReportRepository>();
+        serviceCollection.AddScoped<IReportDataRepository, ReportDataRepository>();
         serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }
