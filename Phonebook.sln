@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportManagement.Domain", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportManagement.Infrastructure.Data", "Services\ReportManagement\ReportManagement.Infrastructure.Data\ReportManagement.Infrastructure.Data.csproj", "{E7638BAB-0C83-4BE1-B2E5-B280574126BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportManagement.Application.Tests", "Services\ReportManagement\Tests\ReportManagement.Application.Tests\ReportManagement.Application.Tests.csproj", "{9F889C2C-84FA-4912-AD76-F8E22ECD5838}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,10 @@ Global
 		{E7638BAB-0C83-4BE1-B2E5-B280574126BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7638BAB-0C83-4BE1-B2E5-B280574126BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7638BAB-0C83-4BE1-B2E5-B280574126BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F889C2C-84FA-4912-AD76-F8E22ECD5838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F889C2C-84FA-4912-AD76-F8E22ECD5838}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F889C2C-84FA-4912-AD76-F8E22ECD5838}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F889C2C-84FA-4912-AD76-F8E22ECD5838}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +144,7 @@ Global
 		{684A5507-6A53-4B26-B7CD-C3828D33ABD6} = {4DC85687-49CC-4DFC-B391-84DB72FBFE02}
 		{AF59B5BE-EF8C-49B4-83B6-87A191E7F045} = {4DC85687-49CC-4DFC-B391-84DB72FBFE02}
 		{E7638BAB-0C83-4BE1-B2E5-B280574126BD} = {4DC85687-49CC-4DFC-B391-84DB72FBFE02}
+		{9F889C2C-84FA-4912-AD76-F8E22ECD5838} = {857A5ADE-D9C7-451F-8A04-84D840A9F01C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {587E730B-3552-4EB0-B7B5-B050C8CB554A}

@@ -25,15 +25,14 @@ public class ReportsControllerTests
     [Fact]
     public async Task CreateReportAsync_WhenSuccessful_Returns_OK()
     {
-        var reportRequest = fixture.Create<ReportRequest>();
         var reportResponse = fixture.Create<ReportResponse>();
 
         var response = Result<ReportResponse>.Success(reportResponse);
 
-        reportService.CreateReportAsync(reportRequest)
+        reportService.CreateReportAsync()
             .Returns(response);
 
-        ActionResult<ApiResponse<ReportResponse>> result = await reportController.CreateReportAsync(reportRequest);
+        ActionResult<ApiResponse<ReportResponse>> result = await reportController.CreateReportAsync();
 
         Assert.IsType<CreatedAtActionResult>(result.Result);
     }
@@ -41,13 +40,12 @@ public class ReportsControllerTests
     [Fact]
     public async Task CreateReportAsync_WhenFailed_Returns_BadRequest()
     {
-        var reportRequest = fixture.Create<ReportRequest>();
         var response = Result<ReportResponse>.Failure("Cannot create report!");
 
-        reportService.CreateReportAsync(reportRequest)
+        reportService.CreateReportAsync()
             .Returns(response);
 
-        ActionResult<ApiResponse<ReportResponse>> result = await reportController.CreateReportAsync(reportRequest);
+        ActionResult<ApiResponse<ReportResponse>> result = await reportController.CreateReportAsync();
         Assert.IsType<BadRequestObjectResult>(result.Result);
     }
 

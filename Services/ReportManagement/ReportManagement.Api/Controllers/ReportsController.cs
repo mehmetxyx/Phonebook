@@ -16,14 +16,14 @@ public class ReportsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<ApiResponse<ReportResponse>>> CreateReportAsync(ReportRequest reportRequest)
+    public async Task<ActionResult<ApiResponse<ReportResponse>>> CreateReportAsync()
     {
-        var result = await reportService.CreateReportAsync(reportRequest);
+        var result = await reportService.CreateReportAsync();
 
         if (result.IsSuccess)
-            return CreatedAtAction(nameof(GetReportByIdAsync), new { reportId = result.Value.Id }, result.ToApiResponse());
+            return CreatedAtAction(nameof(GetReportByIdAsync), new { reportId = result?.Value?.Id }, result?.ToApiResponse());
 
-        return BadRequest(result.ToApiResponse());
+        return BadRequest(result?.ToApiResponse());
     }
 
     [HttpGet]
