@@ -17,9 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Shared\Shared.Common\Shared.Common.csproj" />
     <ProjectReference Include="..\..\ReportManagement.Application\ReportManagement.Application.csproj" />
-    <ProjectReference Include="..\..\ReportManagement.Domain\ReportManagement.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

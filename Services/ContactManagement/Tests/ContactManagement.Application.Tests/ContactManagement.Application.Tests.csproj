@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Shared\Shared.Common\Shared.Common.csproj" />
     <ProjectReference Include="..\..\ContactManagement.Application\ContactManagement.Application.csproj" />
   </ItemGroup>
 

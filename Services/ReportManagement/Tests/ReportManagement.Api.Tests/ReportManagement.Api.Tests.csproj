@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ReportManagement.Api\ReportManagement.Api.csproj" />
-    <ProjectReference Include="..\..\ReportManagement.Application\ReportManagement.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
