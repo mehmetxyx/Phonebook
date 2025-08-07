@@ -22,4 +22,13 @@ public class ReportDataRepository : IReportDataRepository
             .Select(r => r.ToDomain())
             .ToList();
     }
+
+    public async Task SaveReportDataAsync(List<ReportData> reportData)
+    {
+        var reportDataEntities = reportData
+            .Select(r => r.ToEntity())
+            .ToList();
+
+        await context.ReportData.AddRangeAsync(reportDataEntities);
+    }
 }

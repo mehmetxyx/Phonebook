@@ -69,6 +69,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Application.Messagin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManagement.Messaging.Service.Tests", "Services\ContactManagement\Tests\ContactManagement.Messaging.Service.Tests\ContactManagement.Messaging.Service.Tests.csproj", "{FCD9BB70-B3D6-4698-B4CC-DD5BD8F19A80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportManagement.Messaging.Service.Tests", "Services\ReportManagement\Tests\ReportManagement.Messaging.Service.Tests\ReportManagement.Messaging.Service.Tests.csproj", "{3071BF19-6D6D-4207-93C1-0F907F6B09E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -163,6 +165,10 @@ Global
 		{FCD9BB70-B3D6-4698-B4CC-DD5BD8F19A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCD9BB70-B3D6-4698-B4CC-DD5BD8F19A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCD9BB70-B3D6-4698-B4CC-DD5BD8F19A80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3071BF19-6D6D-4207-93C1-0F907F6B09E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3071BF19-6D6D-4207-93C1-0F907F6B09E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3071BF19-6D6D-4207-93C1-0F907F6B09E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3071BF19-6D6D-4207-93C1-0F907F6B09E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -194,6 +200,7 @@ Global
 		{DD4D90FD-647C-42B3-97D4-6B829EB1A244} = {F0AF7D2B-AFA3-4FBF-B2C7-DBEA80B69C86}
 		{D7801514-52F7-42B2-A837-770248A55A94} = {472C81E0-4D68-418B-BE04-ACE46C96CE3C}
 		{FCD9BB70-B3D6-4698-B4CC-DD5BD8F19A80} = {2E2CCFDF-FCCC-4C86-A1F6-3D096B5AC503}
+		{3071BF19-6D6D-4207-93C1-0F907F6B09E4} = {857A5ADE-D9C7-451F-8A04-84D840A9F01C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {587E730B-3552-4EB0-B7B5-B050C8CB554A}

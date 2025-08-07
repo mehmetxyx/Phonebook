@@ -16,7 +16,7 @@ Accept: application/json
 
 
 ### Get contact
-@contactid=0662534e-11f1-4e49-bc22-b915bbf7291d
+@contactid=60ec5933-95dc-4f1c-88ed-a26ef0dd36ab
 GET {{contacts.api}}/{{contactid}}
 Accept: application/json
 
@@ -28,8 +28,8 @@ POST {{contacts.api}}/{{contactid}}/details
 Content-Type: application/json
 
 {
-    "type": "Email",
-    "value": "aa@g.comxx"
+    "type": "Location",
+    "value": "London"
 }
 
 ### get all contact details

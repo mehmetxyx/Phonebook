@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ReportManagement.Infrastructure.Data.Entities;
 using ReportManagement.Infrastructure.Data.Repositories;
+using ReportManagement.Infrastructure.Data.Mappers;
 
 namespace ReportManagement.Infrastructure.Data.Tests;
 
@@ -35,6 +36,24 @@ public class ReportDataRepositoryTests
 
         var savedReports = await reportDataRepository.GetAllAsync();
 
+        Assert.NotNull(savedReports);
+        Assert.Equal(3, savedReports.Count);
+    }
+
+    [Fact]
+    public async Task SaveReportDataAsync_WhenSuccessful_SavesReportData()
+    {
+        var reportDataEntities = fixture.Build<ReportDataEntity>()
+            .Without(r => r.Report)
+            .CreateMany(3)
+            .ToList();
+
+        var reportData = reportDataEntities.Select(r => r.ToDomain()).ToList();
+
+        await reportDataRepository.SaveReportDataAsync(reportData);
+        context.SaveChanges();
+
+        var savedReports = await context.ReportData.ToListAsync();
         Assert.NotNull(savedReports);
         Assert.Equal(3, savedReports.Count);
     }
