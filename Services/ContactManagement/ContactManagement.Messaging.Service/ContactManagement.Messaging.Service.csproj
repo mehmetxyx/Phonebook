@@ -15,5 +15,6 @@
     <ProjectReference Include="..\..\..\Shared\Shared.Contracts\Shared.Contracts.csproj" />
     <ProjectReference Include="..\..\..\Shared\Shared.Infrastructure.Messaging\Shared.Infrastructure.Messaging.csproj" />
     <ProjectReference Include="..\ContactManagement.Application\ContactManagement.Application.csproj" />
+    <ProjectReference Include="..\ContactManagement.Infrastructure.Data\ContactManagement.Infrastructure.Data.csproj" />
   </ItemGroup>
 </Project>

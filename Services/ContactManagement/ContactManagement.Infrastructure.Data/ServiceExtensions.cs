@@ -3,6 +3,7 @@ using ContactManagement.Domain.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using ContactManagement.Application.Repositories;
 
 namespace ContactManagement.Infrastructure.Data;
 public static class ServiceExtensions
@@ -25,6 +26,7 @@ public static class ServiceExtensions
         
         serviceCollection.AddScoped<IContactRepository, ContactRepository>();
         serviceCollection.AddScoped<IContactDetailRepository, ContactDetailRepository>();
+        serviceCollection.AddScoped<IContactReportDataRepository, ContactReportDataRepository>();
         serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

@@ -9,9 +9,9 @@ public class ReportDataRequestedEventConsumer : IConsumer<ReportDataRequestedEve
 {
     private readonly ILogger<ReportDataRequestedEventConsumer> logger;
     private readonly IBus _bus;
-    private readonly IReportDataRequestHandler reportDataRequestHandler;
+    private readonly IReportDataRequestEventHandler reportDataRequestHandler;
 
-    public ReportDataRequestedEventConsumer(ILogger<ReportDataRequestedEventConsumer> logger, IBus bus, IReportDataRequestHandler reportDataRequestHandler)
+    public ReportDataRequestedEventConsumer(ILogger<ReportDataRequestedEventConsumer> logger, IBus bus, IReportDataRequestEventHandler reportDataRequestHandler)
     {
         this.logger = logger;
         this._bus = bus;
@@ -19,11 +19,19 @@ public class ReportDataRequestedEventConsumer : IConsumer<ReportDataRequestedEve
     }
     public async Task Consume(ConsumeContext<ReportDataRequestedEvent> context)
     {
+        //TODO: remove
         logger.LogInformation("ReportDataRequestedEventConsumer: {Message}", JsonSerializer.Serialize(context.Message));
-        logger.LogInformation("Creating ReporData");
+        logger.LogInformation("Creating ReporData for {ReportId}", context.Message.ReportId);
         
-        var reportDataCreatedEvent = await reportDataRequestHandler.GenerateReportData(context.Message);
+        var reportDataCreatedEvent = await reportDataRequestHandler.GenerateReportDataAsync(context.Message);
 
-        await _bus.Publish(reportDataCreatedEvent);
+        if(!reportDataCreatedEvent.IsSuccess)
+        {
+            logger.LogError("Failed to create report data for ReportId: {ReportId}. Error: {Error}", context.Message.ReportId, reportDataCreatedEvent.Message);
+            //TODO: Handle failure appropriately, e.g., retry logic, dead-letter queue, etc.
+            return;
+        }
+        
+        await _bus.Publish(reportDataCreatedEvent.Value);
     }
 }
