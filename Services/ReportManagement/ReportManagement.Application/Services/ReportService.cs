@@ -5,7 +5,9 @@ using ReportManagement.Application.Mappers;
 using ReportManagement.Domain.Entities;
 using ReportManagement.Domain.Enums;
 using ReportManagement.Domain.Repositories;
+using Shared.Application.Messaging;
 using Shared.Common;
+using Shared.Contracts;
 
 namespace ReportManagement.Application.Services;
 public class ReportService: IReportService
@@ -13,12 +15,14 @@ public class ReportService: IReportService
     private readonly ILogger<ReportService> logger;
     private readonly IUnitOfWork unitOfWork;
     private IReportRepository reportRepository;
+    private readonly IEventPublisher eventPublisher;
 
-    public ReportService(ILogger<ReportService> logger, IUnitOfWork unitOfWork, IReportRepository reportRepository)
+    public ReportService(ILogger<ReportService> logger, IUnitOfWork unitOfWork, IReportRepository reportRepository, IEventPublisher eventPublisher)
     {
         this.logger = logger;
         this.unitOfWork = unitOfWork;
         this.reportRepository = reportRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     public async Task<Result<ReportResponse>> CreateReportAsync()
@@ -34,6 +38,12 @@ public class ReportService: IReportService
 
             await reportRepository.AddAsync(report);
             await unitOfWork.SaveAsync();
+
+            await eventPublisher.PublishAsync(new ReportDataRequestedEvent
+            {
+                ReportId = report.Id,
+                RequestDate = report.RequestDate
+            });
 
             return Result<ReportResponse>.Success(report.ToReportResponse());
         }

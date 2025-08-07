@@ -1,5 +1,7 @@
-using ReportManagement.Infrastructure.Data;
 using ReportManagement.Application;
+using ReportManagement.Infrastructure.Data;
+using Shared.Application.Messaging;
+using Shared.Infrastructure.Messaging;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +17,11 @@ builder.Services.AddControllers(options =>
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureData(builder.Configuration, builder.Environment.IsDevelopment());
 
+builder.Services.AddMassTransitWithRabbitMq(builder.Configuration, typeof(Program).Assembly);
+builder.Services.AddScoped<IEventPublisher, EventPublisher>();
 builder.Services.AddOpenApi();
 
+builder.Services.AddOpenApi();
 
 var app = builder.Build();
 

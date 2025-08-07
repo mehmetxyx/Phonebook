@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shared.Application.Messaging\Shared.Application.Messaging.csproj" />
     <ProjectReference Include="..\..\..\Shared\Shared.Common\Shared.Common.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Shared.Contracts\Shared.Contracts.csproj" />
     <ProjectReference Include="..\ReportManagement.Domain\ReportManagement.Domain.csproj" />
   </ItemGroup>
 

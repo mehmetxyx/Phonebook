@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.Common\Shared.Common.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Shared.Contracts\Shared.Contracts.csproj" />
     <ProjectReference Include="..\ContactManagement.Domain\ContactManagement.Domain.csproj" />
   </ItemGroup>
 

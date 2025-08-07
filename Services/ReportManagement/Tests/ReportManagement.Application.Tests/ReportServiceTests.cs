@@ -6,6 +6,7 @@ using ReportManagement.Application.Interfaces;
 using ReportManagement.Application.Services;
 using ReportManagement.Domain.Entities;
 using ReportManagement.Domain.Repositories;
+using Shared.Application.Messaging;
 using Shared.Common;
 
 namespace ReportManagement.Application.Tests;
@@ -17,13 +18,15 @@ public class ReportServiceTests
     private readonly ReportService reportService;
     private readonly Fixture fixture;
     private readonly ILogger<ReportService> logger;
+    private readonly IEventPublisher eventPublisher;
 
     public ReportServiceTests()
     {
         unitOfWork = Substitute.For<IUnitOfWork>();
         reportRepository = Substitute.For<IReportRepository>();
         logger = Substitute.For<ILogger<ReportService>>();
-        reportService = new ReportService(logger, unitOfWork, reportRepository);
+        eventPublisher = Substitute.For<IEventPublisher>();
+        reportService = new ReportService(logger, unitOfWork, reportRepository, eventPublisher);
         fixture = new Fixture();
     }
     [Fact]
