@@ -1,6 +1,5 @@
-﻿const contactsApi = "http://localhost:5074/api/contacts";
-const reportsApi = "http://localhost:5012/api/reports";
-
+﻿const contactsApi = window.contactsApi;
+const reportsApi = window.reportsApi;
 let selectedContactId = null;
 let selectedContact = null;
 
