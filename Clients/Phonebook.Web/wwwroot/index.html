@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Phonebook Client</title>
+    <link rel="stylesheet" href="styles.css?v14" />
+</head>
+<body>
+    <h1>📞 Phonebook</h1>
+
+    <section id="contacts">
+        <h2>Contacts</h2>
+        <form id="create-contact-form">
+            <input type="text" placeholder="Name" id="name" required />
+            <input type="text" placeholder="Surname" id="surname" required />
+            <input type="text" placeholder="Company" id="company" required />
+            <button type="submit">Add Contact</button>
+        </form>
+        <ul id="contact-list"></ul>
+        <h3>Details</h3>
+        <h4 id="selected-contact-label" style="margin-top: 1rem; color: #555;"></h4>
+        <form id="create-detail-form">
+            <select id="detail-type">
+                <option value="PhoneNumber">Phone</option>
+                <option value="Email">Email</option>
+                <option value="Location">Location</option>
+            </select>
+            <input type="text" placeholder="Value" id="detail-value" required />
+            <button type="submit">Add Detail</button>
+        </form>
+        <ul id="detail-list"></ul>
+    </section>
+
+    <section id="reports">
+        <h2>Reports</h2>
+        <div style="margin-bottom: 1rem;">
+            <button id="request-report">Request Location Report</button>
+            <button id="refresh-report" style="margin-left: 0.5rem;">🔄 Refresh Reports</button>
+        </div>
+        <h3>Report Details</h3>
+        <h4 id="selected-report-label" style="margin-top: 1rem; color: #555;"></h4>
+        <ul id="report-detail-list" class="list-container"></ul>
+        <ul id="report-list" class="list-container"></ul>
+    </section>
+
+
+    <script src="app.js"></script>
+</body>
+</html>

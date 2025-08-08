@@ -1,0 +1,114 @@
+﻿/* Base layout */
+body {
+    font-family: sans-serif;
+    margin: 2rem;
+    background: #f9f9f9;
+}
+
+h1 {
+    color: #333;
+}
+
+section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+/* Form inputs and buttons */
+form input,
+form select {
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    background: #007acc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005fa3;
+}
+
+/* Shared list container */
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+}
+
+/* Shared list item style */
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.list-item:hover {
+    background-color: #eef6ff;
+}
+
+.list-item.selected {
+    background-color: #cce5ff;
+    border-color: #99c2ff;
+    font-weight: bold;
+}
+
+/* Text inside list items */
+.list-text {
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* Buttons inside list items */
+.list-button {
+    background-color: #007acc;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.list-button:hover {
+    background-color: #005fa3;
+}
+
+/* Delete button variant */
+.list-button.delete {
+    background-color: #e74c3c;
+}
+
+.list-button.delete:hover {
+    background-color: #c0392b;
+}
+
+/* Contact-specific styles */
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#contact-list .list-item{
+    cursor:pointer;
+}
+
+.contact-icon {
+    font-size: 1.2rem;
+    color: #007acc;
+}
