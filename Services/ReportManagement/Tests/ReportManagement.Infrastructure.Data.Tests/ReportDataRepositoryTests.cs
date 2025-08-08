@@ -26,7 +26,9 @@ public class ReportDataRepositoryTests
     [Fact]
     public async Task GetAllAsync_WhenSuccessful_Returns_AllReports()
     {
+        var reportId = Guid.NewGuid();
         var reportDataEntities = fixture.Build<ReportDataEntity>()
+            .With(r => r.ReportId, reportId)
             .Without(r => r.Report)
             .CreateMany(3)
             .ToList();
@@ -34,7 +36,7 @@ public class ReportDataRepositoryTests
         await context.ReportData.AddRangeAsync(reportDataEntities);
         await context.SaveChangesAsync();
 
-        var savedReports = await reportDataRepository.GetAllAsync();
+        var savedReports = await reportDataRepository.GetAllAsync(reportId);
 
         Assert.NotNull(savedReports);
         Assert.Equal(3, savedReports.Count);

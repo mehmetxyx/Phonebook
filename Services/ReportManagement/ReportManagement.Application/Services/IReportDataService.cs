@@ -5,5 +5,5 @@ namespace ReportManagement.Application.Services;
 
 public interface IReportDataService
 {
-    Task<Result<List<ReportDataResponse>>> GetAllReportData();
+    Task<Result<List<ReportDataResponse>>> GetAllReportData(Guid reportId);
 }

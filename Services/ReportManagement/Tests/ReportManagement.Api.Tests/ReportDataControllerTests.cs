@@ -24,13 +24,18 @@ public class ReportDataControllerTests
     [Fact]
     public async Task GetAllReportDataAsync_WhenSuccessful_Returns_AllReportData()
     {
-        var reportDataResponse = fixture.CreateMany<ReportDataResponse>(3).ToList();
+        var reportId = Guid.NewGuid();
+        var reportDataResponse = fixture.Build<ReportDataResponse>()
+            .With(r => r.ReportId, reportId)
+            .CreateMany(3)
+            .ToList();
+
         var serviceResponse = Result<List<ReportDataResponse>>.Success(reportDataResponse);
 
-        reportDataService.GetAllReportData()
+        reportDataService.GetAllReportData(reportId)
             .Returns(serviceResponse);
 
-        ActionResult<ApiResponse<List<ReportDataResponse>>> result = await reportDataController.GetAllReportDataAsync();
+        ActionResult<ApiResponse<List<ReportDataResponse>>> result = await reportDataController.GetAllReportDataAsync(reportId);
 
         Assert.IsType<OkObjectResult>(result.Result);
     }
@@ -38,12 +43,13 @@ public class ReportDataControllerTests
     [Fact]
     public async Task GetAllReportDataAsync_WhenFailed_Returns_NotFound()
     {
+        Guid reportId = Guid.NewGuid();
         var serviceResponse = Result<List<ReportDataResponse>>.Failure("No report data found!");
         
-        reportDataService.GetAllReportData()
+        reportDataService.GetAllReportData(reportId)
             .Returns(serviceResponse);
 
-        ActionResult<ApiResponse<List<ReportDataResponse>>> result = await reportDataController.GetAllReportDataAsync();
+        ActionResult<ApiResponse<List<ReportDataResponse>>> result = await reportDataController.GetAllReportDataAsync(reportId);
 
         Assert.IsType<NotFoundObjectResult>(result.Result);
     }

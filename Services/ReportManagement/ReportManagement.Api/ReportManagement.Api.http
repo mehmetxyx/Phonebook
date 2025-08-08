@@ -7,7 +7,7 @@ POST {{report.api}}
 GET {{report.api}}
 
 ### get report by id
-@report.id = a258b229-84d7-46b8-82c2-5f891550c6ab
+@report.id = 75ce635e-6f43-4559-982d-694986f7f7d1
 GET {{report.api}}/{{report.id}}
 
 ### get report data

@@ -14,9 +14,11 @@ public class ReportDataRepository : IReportDataRepository
         this.context = context;
     }
 
-    public async Task<List<ReportData>> GetAllAsync()
+    public async Task<List<ReportData>> GetAllAsync(Guid reportId)
     {
-        var reportData = await context.ReportData.ToListAsync();
+        var reportData = await context.ReportData
+            .Where(r => r.ReportId == reportId)
+            .ToListAsync();
 
         return reportData
             .Select(r => r.ToDomain())

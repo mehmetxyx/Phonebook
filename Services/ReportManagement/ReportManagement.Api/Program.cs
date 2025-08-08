@@ -32,4 +32,13 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 
+//todo: Add CORS policy to allow requests from the Phonebook client
+app.UseCors(options =>
+{
+    options.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
+
+
 app.Run();

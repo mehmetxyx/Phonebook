@@ -20,11 +20,11 @@ public class ReportDataService: IReportDataService
         this.reportDataRepository = reportDataRepository;
     }
 
-    public async Task<Result<List<ReportDataResponse>>> GetAllReportData()
+    public async Task<Result<List<ReportDataResponse>>> GetAllReportData(Guid reportId)
     {
         try
         {
-            var reportData = await reportDataRepository.GetAllAsync();
+            var reportData = await reportDataRepository.GetAllAsync(reportId);
             if (reportData == null || !reportData.Any())
                 return Result<List<ReportDataResponse>>.Success("No report data found.");
 

@@ -71,6 +71,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManagement.Messaging
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportManagement.Messaging.Service.Tests", "Services\ReportManagement\Tests\ReportManagement.Messaging.Service.Tests\ReportManagement.Messaging.Service.Tests.csproj", "{3071BF19-6D6D-4207-93C1-0F907F6B09E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook.Web", "Clients\Phonebook.Web\Phonebook.Web.csproj", "{1680A8B0-2C4F-4982-B3CA-B47E23D9BC54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +171,10 @@ Global
 		{3071BF19-6D6D-4207-93C1-0F907F6B09E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3071BF19-6D6D-4207-93C1-0F907F6B09E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3071BF19-6D6D-4207-93C1-0F907F6B09E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1680A8B0-2C4F-4982-B3CA-B47E23D9BC54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1680A8B0-2C4F-4982-B3CA-B47E23D9BC54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1680A8B0-2C4F-4982-B3CA-B47E23D9BC54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1680A8B0-2C4F-4982-B3CA-B47E23D9BC54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -201,6 +207,7 @@ Global
 		{D7801514-52F7-42B2-A837-770248A55A94} = {472C81E0-4D68-418B-BE04-ACE46C96CE3C}
 		{FCD9BB70-B3D6-4698-B4CC-DD5BD8F19A80} = {2E2CCFDF-FCCC-4C86-A1F6-3D096B5AC503}
 		{3071BF19-6D6D-4207-93C1-0F907F6B09E4} = {857A5ADE-D9C7-451F-8A04-84D840A9F01C}
+		{1680A8B0-2C4F-4982-B3CA-B47E23D9BC54} = {615A6B33-AEE4-484C-9092-0DCC724F0FB7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {587E730B-3552-4EB0-B7B5-B050C8CB554A}

@@ -28,12 +28,15 @@ public class ReportDataServiceTests
     [Fact]
     public async Task GetAllReportData_WhenSuccessful_ReturnsListOfReportDataResponse()
     {
-        var expectedReportData = fixture.CreateMany<ReportData>(3).ToList();
+        var reportId = Guid.NewGuid();
+        var expectedReportData = fixture.Build<ReportData>()
+            .With(r => r.ReportId, reportId)
+            .CreateMany(3).ToList();
 
-        reportDataRepository.GetAllAsync()
+        reportDataRepository.GetAllAsync(reportId)
             .Returns(expectedReportData);
 
-        var result = await reportDataService.GetAllReportData();
+        var result = await reportDataService.GetAllReportData(reportId);
 
         Assert.True(result.IsSuccess);
     }
@@ -41,10 +44,11 @@ public class ReportDataServiceTests
     [Fact]
     public async Task GetAllReportData_WhenNoDataFound_ReturnsEmptyList()
     {
-        reportDataRepository.GetAllAsync()
+        var reportId = Guid.NewGuid();
+        reportDataRepository.GetAllAsync(reportId)
             .Returns(new List<ReportData>());
 
-        var result = await reportDataService.GetAllReportData();
+        var result = await reportDataService.GetAllReportData(reportId);
 
         Assert.True(result.IsSuccess);
         Assert.Equal("No report data found.", result.Message);

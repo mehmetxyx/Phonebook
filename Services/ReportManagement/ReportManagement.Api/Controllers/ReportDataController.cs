@@ -16,9 +16,9 @@ public class ReportDataController : ControllerBase
     }
 
     [HttpGet("data")]
-    public async Task<ActionResult<ApiResponse<List<ReportDataResponse>>>> GetAllReportDataAsync()
+    public async Task<ActionResult<ApiResponse<List<ReportDataResponse>>>> GetAllReportDataAsync(Guid reportId)
     {
-        var result = await reportDataService.GetAllReportData();
+        var result = await reportDataService.GetAllReportData(reportId);
         if (result.IsSuccess)
             return Ok(result.ToApiResponse());
 
