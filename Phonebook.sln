@@ -16,6 +16,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReportManagement", "ReportManagement", "{4DC85687-49CC-4DFC-B391-84DB72FBFE02}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployments", "Deployments", "{41477C59-B655-49F1-9653-D3D433E6FADB}"
+	ProjectSection(SolutionItems) = preProject
+		Deployment\docker-compose.yml = Deployment\docker-compose.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{615A6B33-AEE4-484C-9092-0DCC724F0FB7}"
 EndProject

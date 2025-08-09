@@ -1,0 +1,100 @@
+services:
+  phonebook-postgres:
+    image: postgres:latest
+    container_name: phonebook.postgres
+    ports:
+      - "55432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  phonebook-rabbitmq:
+    image: rabbitmq:3-management
+    container_name: phonebook.rabbitmq
+    ports:
+      - "55672:5672"
+      - "15673:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  contactmanagement-api:
+    build:
+      context: ../
+      dockerfile: Services/ContactManagement/ContactManagement.Api/Dockerfile
+    container_name: phonebook.contactmanagement.api
+    depends_on:
+      - phonebook-rabbitmq
+    ports:
+      - "50501:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__ContactManagementDb: Server=phonebook-postgres;Port=5432;Database=ContactManagement;Username=postgres;Password=1234;
+
+  contactmanagement-messaging:
+    build:
+      context: ../
+      dockerfile: Services/ContactManagement/ContactManagement.Messaging.Service/Dockerfile
+    container_name: phonebook.contactmanagement.messaging
+    depends_on:
+      - phonebook-postgres
+      - phonebook-rabbitmq
+    environment:
+      DOTNET_ENVIRONMENT: Production
+      ConnectionStrings__ContactManagementDb: Server=phonebook-postgres;Port=5432;Database=ContactManagement;Username=postgres;Password=1234;
+      RabbitMqSettings__Host: phonebook-rabbitmq
+      RabbitMqSettings__Port: 5672
+      RabbitMqSettings__Username: guest
+      RabbitMqSettings__Password: guest
+
+  reportmanagement-api:
+    build:
+      context: ../
+      dockerfile: Services/ReportManagement/ReportManagement.Api/Dockerfile
+    container_name: phonebook.reportmanagement.api
+    depends_on:
+      - phonebook-postgres
+      - phonebook-rabbitmq
+    ports:
+      - "50502:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__ReportManagementDb: Server=phonebook-postgres;Port=5432;Database=ReportManagement;Username=postgres;Password=1234;
+      RabbitMqSettings__Host: phonebook-rabbitmq
+      RabbitMqSettings__Port: 5672
+      RabbitMqSettings__Username: guest
+      RabbitMqSettings__Password: guest
+
+  reportmanagement-messaging:
+    build:
+      context: ../
+      dockerfile: Services/ReportManagement/ReportManagement.Messaging.Service/Dockerfile
+    container_name: phonebook.reportmanagement.messaging
+    depends_on:
+      - phonebook-postgres
+      - phonebook-rabbitmq
+    environment:
+      DOTNET_ENVIRONMENT: Production
+      ConnectionStrings__ReportManagementDb: Server=phonebook-postgres;Port=5432;Database=ReportManagement;Username=postgres;Password=1234;
+      RabbitMqSettings__Host: phonebook-rabbitmq
+      RabbitMqSettings__Port: 5672
+      RabbitMqSettings__Username: guest
+      RabbitMqSettings__Password: guest
+
+  phonebook-web:
+    build:
+      context: ../
+      dockerfile: Clients/Phonebook.Web/Dockerfile
+    container_name: phonebook.phonebook.web
+    depends_on:
+      - contactmanagement-api
+      - reportmanagement-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+    ports:
+      - "53000:8080"
+
+volumes:
+  pgdata:
