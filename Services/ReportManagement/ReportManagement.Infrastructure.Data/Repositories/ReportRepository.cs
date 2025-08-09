@@ -43,4 +43,20 @@ public class ReportRepository : IReportRepository
 
         return entity.ToDomain();
     }
+
+    public void Update(Report report)
+    {
+        var trackedEntity = context.Reports.Local.FirstOrDefault(r => r.Id == report.Id);
+        if (trackedEntity is not null)
+        {
+            trackedEntity.Status = report.Status;
+            trackedEntity.RequestDate = report.RequestDate;
+        }
+        else
+        {
+            var entity = report.ToEntity();
+            context.Reports.Update(entity);
+        }
+    }
+
 }

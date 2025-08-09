@@ -1,6 +1,7 @@
 ﻿using AutoFixture;
 using Microsoft.EntityFrameworkCore;
 using ReportManagement.Domain.Entities;
+using ReportManagement.Domain.Enums;
 using ReportManagement.Infrastructure.Data.Entities;
 using ReportManagement.Infrastructure.Data.Repositories;
 
@@ -87,4 +88,27 @@ public class ReportRepositoryTests
 
         Assert.Null(retrievedReport);
     }
+
+    [Fact]
+    public async Task Update_WhenSuccessful_Returns_SavesReportToDatabase()
+    {
+        var report = fixture.Build<Report>()
+            .With(r => r.Status, ReportStatus.Pending)
+            .Create();
+        
+        await reportRepository.AddAsync(report);
+        await context.SaveChangesAsync();
+
+        report.Status = ReportStatus.Completed;
+
+        reportRepository.Update(report);
+        await context.SaveChangesAsync();
+
+        var savedReport = await context.Reports.FirstOrDefaultAsync(r => r.Id == report.Id);
+
+        Assert.NotNull(savedReport);
+        Assert.Equal(report.Id, savedReport.Id);
+        Assert.Equal(report.Status, savedReport.Status);
+    }
+
 }

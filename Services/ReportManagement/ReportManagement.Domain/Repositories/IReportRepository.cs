@@ -8,4 +8,5 @@ public interface IReportRepository
     Task AddAsync(Report report);
     Task<List<Report>> GetAllAsync();
     Task<Report?> GetByIdAsync(Guid reportId);
+    void Update(Report report);
 }
