@@ -1,6 +1,5 @@
 ﻿using AutoFixture;
 using MassTransit;
-using Moq;
 using NSubstitute;
 using Shared.Contracts;
 
