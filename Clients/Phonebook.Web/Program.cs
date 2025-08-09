@@ -5,14 +5,15 @@ app.UseStaticFiles();
 
 app.MapFallbackToFile("index.html");
 
-app.MapGet("/config.js", () =>
+
+app.MapGet("/config.js", (IConfiguration config) =>
 {
-    var contactsApi = Environment.GetEnvironmentVariable("CONTACT_MANAGEMENT_API") ?? "http://localhost:5074/api/contacts";
-    var reportsApi = Environment.GetEnvironmentVariable("REPORTS_MANAGEMENT_API") ?? "http://localhost:5012/api/reports";
+    var contactApiBaseUrl = config.GetSection("ApiConfigs").GetValue<string>("ContactApiBaseUrl");
+    var reportApiBaseUrl = config.GetSection("ApiConfigs").GetValue<string>("ReportApiBaseUrl");
 
     return Results.Text($@"
-        window.contactsApi = '{contactsApi}';
-        window.reportsApi = '{reportsApi}';
+        window.contactsApi = '{contactApiBaseUrl}';
+        window.reportsApi = '{reportApiBaseUrl}';
     ", "application/javascript");
 });
 
