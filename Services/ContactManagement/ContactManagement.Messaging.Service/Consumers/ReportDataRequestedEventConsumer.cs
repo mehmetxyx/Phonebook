@@ -25,7 +25,7 @@ public class ReportDataRequestedEventConsumer : IConsumer<ReportDataRequestedEve
         
         var reportDataCreatedEvent = await reportDataRequestHandler.GenerateReportDataAsync(context.Message);
 
-        if(!reportDataCreatedEvent.IsSuccess)
+        if(!reportDataCreatedEvent.IsSuccess || reportDataCreatedEvent.Value is null)
         {
             logger.LogError("Failed to create report data for ReportId: {ReportId}. Error: {Error}", context.Message.ReportId, reportDataCreatedEvent.Message);
             //TODO: Handle failure appropriately, e.g., retry logic, dead-letter queue, etc.

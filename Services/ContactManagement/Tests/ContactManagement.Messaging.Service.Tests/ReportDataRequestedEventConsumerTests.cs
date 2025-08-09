@@ -37,7 +37,7 @@ public class ReportDataRequestedEventConsumerTests
         var context = Substitute.For<ConsumeContext<ReportDataRequestedEvent>>();
         context.Message.Returns(reportDataRequestedEvent);
 
-        consumer.Consume(context);
+        await consumer.Consume(context);
         await handler.Received(1).GenerateReportDataAsync(reportDataRequestedEvent);
         await bus.Received(1).Publish(reportDataCreatedEvent);
     }
@@ -56,7 +56,7 @@ public class ReportDataRequestedEventConsumerTests
         var context = Substitute.For<ConsumeContext<ReportDataRequestedEvent>>();
         context.Message.Returns(reportDataRequestedEvent);
 
-        consumer.Consume(context);
+        await consumer.Consume(context);
         await handler.Received(1).GenerateReportDataAsync(reportDataRequestedEvent);
         await bus.DidNotReceive().Publish(Arg.Any<ReportDataCreatedEvent>());
     }
