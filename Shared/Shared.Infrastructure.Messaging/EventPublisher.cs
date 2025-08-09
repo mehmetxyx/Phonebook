@@ -11,6 +11,7 @@ public class EventPublisher : IEventPublisher
         this._publishEndpoint = publishEndpoint;
     }
     public Task PublishAsync<T>(T message, CancellationToken cancellationToken = default)
+        where T : class
     {
         return _publishEndpoint.Publish(message, cancellationToken);
     }
