@@ -23,7 +23,9 @@ public class ReportRepository : IReportRepository
 
     public async Task<List<Report>> GetAllAsync()
     {
-        var reports = await context.Reports.ToListAsync();
+        var reports = await context.Reports
+            .OrderByDescending(r => r.RequestDate)
+            .ToListAsync();
 
         return reports
             .Select(r => r.ToDomain())

@@ -147,7 +147,9 @@ async function loadReports() {
 
         const text = document.createElement("span");
         text.className = "list-text";
-        text.textContent = `Report ${report.id} - ${report.status ?? "Unknown"}`;
+
+        const formattedDate = new Date(report.requestDate).toLocaleString('tr-TR'); // or 'en-US' if preferred
+        text.textContent = `📝 Report ${report.id} - ${report.status ?? "Unknown"} (Requested: ${formattedDate})`;
 
         const viewBtn = document.createElement("button");
         viewBtn.className = "list-button";
@@ -171,7 +173,8 @@ async function showReportDetail(reportId) {
     const report = reportMeta.data;
 
     const label = document.getElementById("selected-report-label");
-    label.textContent = `For report id: #${report.id}`;
+    const formattedDate = new Date(report.requestDate).toLocaleString('tr-TR');
+    label.textContent = `For report id: #${report.id} (Requested at: ${formattedDate})`;
 
     reportDetailList.style.display = "block";
     reportDetailList.innerHTML = "";
