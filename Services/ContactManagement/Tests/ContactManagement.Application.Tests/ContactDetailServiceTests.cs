@@ -33,7 +33,7 @@ public class ContactDetailServiceTests
         contactDetailRepository.AddAsync(Arg.Any<ContactDetail>())
             .Returns(Task.CompletedTask);
 
-        var request = fixture.Create<ContactDetailCreateRequest>();
+        var request = fixture.Create<ContactDetailRequest>();
 
         var result = await contactDetailService.CreateContactDetailAsync(contactId, request);
 
@@ -46,7 +46,7 @@ public class ContactDetailServiceTests
         contactDetailRepository.When(x => x.AddAsync(Arg.Any<ContactDetail>()))
             .Do(x => { throw new Exception("Failed to add contact detail"); });
 
-        var request = fixture.Create<ContactDetailCreateRequest>();
+        var request = fixture.Create<ContactDetailRequest>();
 
         var result = await contactDetailService.CreateContactDetailAsync(contactId, request);
 

@@ -17,7 +17,7 @@ public class ContactDetailsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<ApiResponse<ContactDetailCreateResponse>>> ContactDetailCreateAsync(Guid contactId, [FromBody] ContactDetailCreateRequest createRequest)
+    public async Task<ActionResult<ApiResponse<ContactDetailResponse>>> ContactDetailCreateAsync(Guid contactId, [FromBody] ContactDetailRequest createRequest)
     {
         var result = await contactDetailService.CreateContactDetailAsync(contactId, createRequest);
 
@@ -28,7 +28,7 @@ public class ContactDetailsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<ApiResponse<List<ContactDetailGetResponse>>>> GetAllContactDetailsAsync(Guid contactId)
+    public async Task<ActionResult<ApiResponse<List<ContactDetailResponse>>>> GetAllContactDetailsAsync(Guid contactId)
     {
         var result = await contactDetailService.GetAllContactDetailsAsync(contactId);
 
@@ -38,7 +38,7 @@ public class ContactDetailsController : ControllerBase
     }
 
     [HttpGet("{contactDetailId}")]
-    public async Task<ActionResult<ApiResponse<ContactDetailGetResponse>>> GetContactDetailByIdAsync(Guid contactId, Guid contactDetailId)
+    public async Task<ActionResult<ApiResponse<ContactDetailResponse>>> GetContactDetailByIdAsync(Guid contactId, Guid contactDetailId)
     {
         var result = await contactDetailService.GetContactDetailByIdAsync(contactId, contactDetailId);
         if (result.IsSuccess)

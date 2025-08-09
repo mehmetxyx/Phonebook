@@ -4,9 +4,9 @@ using ContactManagement.Domain.Entities;
 namespace ContactManagement.Application.Mappers;
 public static class ContactDetailMapper
 {
-    public static ContactDetailGetResponse ToContactDetailGetResponse(this ContactDetail contactDetail)
+    public static ContactDetailResponse ToContactDetailResponse(this ContactDetail contactDetail)
     {
-        return new ContactDetailGetResponse
+        return new ContactDetailResponse
         {
             Id = contactDetail.Id,
             ContactId = contactDetail.ContactId,
@@ -15,7 +15,7 @@ public static class ContactDetailMapper
         };
     }
 
-    public static ContactDetail ToDomain(this ContactDetailCreateRequest request, Guid contactId)
+    public static ContactDetail ToDomain(this ContactDetailRequest request, Guid contactId)
     {
         return new ContactDetail
         {
@@ -23,17 +23,6 @@ public static class ContactDetailMapper
             ContactId = contactId,
             Type = request.Type,
             Value = request.Value
-        };
-    }
-
-    public static ContactDetailCreateResponse ToContactDetailCreateResponse(this ContactDetail contactDetail)
-    {
-        return new ContactDetailCreateResponse
-        {
-            Id = contactDetail.Id,
-            ContactId = contactDetail.ContactId,
-            Type = contactDetail.Type,
-            Value = contactDetail.Value
         };
     }
 }

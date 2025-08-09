@@ -20,7 +20,7 @@ public class ContactDetailService: IContactDetailService
         this.contactDetailRepository = contactDetailRepository;
     }
 
-    public async Task<Result<ContactDetailCreateResponse>> CreateContactDetailAsync(Guid contactId, ContactDetailCreateRequest request)
+    public async Task<Result<ContactDetailResponse>> CreateContactDetailAsync(Guid contactId, ContactDetailRequest request)
     {
         try
         {
@@ -29,54 +29,54 @@ public class ContactDetailService: IContactDetailService
             await contactDetailRepository.AddAsync(contactDetail);
             await unitOfWork.SaveAsync();
 
-            return Result<ContactDetailCreateResponse>.Success(contactDetail.ToContactDetailCreateResponse());
+            return Result<ContactDetailResponse>.Success(contactDetail.ToContactDetailResponse());
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Error creating contact detail for contact {ContactId}", contactId);
         }
 
-        return Result<ContactDetailCreateResponse>.Failure("Failed to create contact detail");
+        return Result<ContactDetailResponse>.Failure("Failed to create contact detail");
     }
 
-    public async Task<Result<List<ContactDetailGetResponse>>> GetAllContactDetailsAsync(Guid contactId)
+    public async Task<Result<List<ContactDetailResponse>>> GetAllContactDetailsAsync(Guid contactId)
     {
         try
         {
             var contactDetails = await contactDetailRepository.GetAllAsync(contactId);
 
             var responses = contactDetails
-                .Select(cd => cd.ToContactDetailGetResponse())
+                .Select(cd => cd.ToContactDetailResponse())
                 .ToList();
 
-            return Result<List<ContactDetailGetResponse>>.Success(responses);
+            return Result<List<ContactDetailResponse>>.Success(responses);
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Error retrieving contact details for contact {ContactId}", contactId);
         }
 
-        return Result<List<ContactDetailGetResponse>>.Failure("Failed to retrieve contact details");
+        return Result<List<ContactDetailResponse>>.Failure("Failed to retrieve contact details");
     }
 
-    public async Task<Result<ContactDetailGetResponse>> GetContactDetailByIdAsync(Guid contactId, Guid contactDetailId)
+    public async Task<Result<ContactDetailResponse>> GetContactDetailByIdAsync(Guid contactId, Guid contactDetailId)
     {
         try
         {
             var contactDetail = await contactDetailRepository.GetByIdAsync(contactId, contactDetailId);
             if (contactDetail == null)
             {
-                return Result<ContactDetailGetResponse>.Failure("Contact detail not found");
+                return Result<ContactDetailResponse>.Failure("Contact detail not found");
             }
 
-            return Result<ContactDetailGetResponse>.Success(contactDetail.ToContactDetailGetResponse());
+            return Result<ContactDetailResponse>.Success(contactDetail.ToContactDetailResponse());
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Error retrieving contact detail {ContactDetailId} for contact {ContactId}", contactDetailId, contactId);
         }
 
-        return Result<ContactDetailGetResponse>.Failure("Failed to retrieve contact detail");
+        return Result<ContactDetailResponse>.Failure("Failed to retrieve contact detail");
     }
 
 

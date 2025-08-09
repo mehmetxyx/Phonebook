@@ -2,7 +2,7 @@
 
 namespace ContactManagement.Application.Dtos;
 
-public class ContactDetailGetResponse
+public class ContactDetailResponse
 {
     public required Guid Id { get; set; }
     public required Guid ContactId { get; set; }

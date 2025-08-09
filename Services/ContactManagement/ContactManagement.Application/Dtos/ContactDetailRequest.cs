@@ -2,7 +2,7 @@
 
 namespace ContactManagement.Application.Dtos;
 
-public class ContactDetailCreateRequest
+public class ContactDetailRequest
 {
     public required InformationType Type { get; set; }
     public required string Value { get; set; }
