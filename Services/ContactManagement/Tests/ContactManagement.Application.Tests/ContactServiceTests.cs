@@ -31,7 +31,7 @@ public class ContactServiceTests
         contactRepository.AddAsync(Arg.Any<Contact>())
             .Returns(Task.CompletedTask);
 
-        var request = fixture.Create<ContactCreateRequest>();
+        var request = fixture.Create<ContactRequest>();
 
         var result = await contactService.CreateContactAsync(request);
 
@@ -44,7 +44,7 @@ public class ContactServiceTests
         contactRepository.When(x => x.AddAsync(Arg.Any<Contact>()))
             .Do(x => { throw new Exception("Failed to add contact"); });
 
-        var request = fixture.Create<ContactCreateRequest>();
+        var request = fixture.Create<ContactRequest>();
 
         var result = await contactService.CreateContactAsync(request);
 

@@ -1,6 +1,6 @@
 ﻿namespace ContactManagement.Application.Dtos;
 
-public class ContactCreateRequest
+public class ContactRequest
 {
     public required string Name { get; set; }
     public required string Surname { get; set; }

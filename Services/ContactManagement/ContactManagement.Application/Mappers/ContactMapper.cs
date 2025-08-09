@@ -4,9 +4,9 @@ using ContactManagement.Domain.Entities;
 namespace ContactManagement.Application.Mappers;
 public static class ContactMapper
 {
-    public static ContactGetResponse ToGetContactResponse(this Contact contact)
+    public static ContactResponse ToGetContactResponse(this Contact contact)
     {
-        return new ContactGetResponse
+        return new ContactResponse
         {
             Id = contact.Id,
             Name = contact.Name,
@@ -15,9 +15,9 @@ public static class ContactMapper
         };
     }
 
-    public static ContactCreateResponse ToContactCreateResponse(this Contact contact)
+    public static ContactResponse ToContactResponse(this Contact contact)
     {
-        return new ContactCreateResponse
+        return new ContactResponse
         {
             Id = contact.Id,
             Name = contact.Name,
@@ -26,7 +26,7 @@ public static class ContactMapper
         };
     }
 
-    public static Contact ToDomain(this ContactCreateRequest request)
+    public static Contact ToDomain(this ContactRequest request)
     {
         return new Contact
         {
