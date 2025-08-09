@@ -1,5 +1,6 @@
 ﻿using ContactManagement.Application.Dtos;
 using ContactManagement.Application.Interfaces;
+using ContactManagement.Application.Mappers;
 using ContactManagement.Domain.Repositories;
 using Shared.Common;
 using Microsoft.Extensions.Logging;

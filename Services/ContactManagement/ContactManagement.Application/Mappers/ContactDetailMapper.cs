@@ -2,10 +2,20 @@
 using ContactManagement.Domain.Entities;
 
 namespace ContactManagement.Application.Mappers;
-
-public static class ContactDetailCreateRequestMapper
+public static class ContactDetailMapper
 {
-    public static ContactDetail ToDomain(this ContactDetailCreateRequest request, Guid  contactId)
+    public static ContactDetailGetResponse ToContactDetailGetResponse(this ContactDetail contactDetail)
+    {
+        return new ContactDetailGetResponse
+        {
+            Id = contactDetail.Id,
+            ContactId = contactDetail.ContactId,
+            Type = contactDetail.Type,
+            Value = contactDetail.Value
+        };
+    }
+
+    public static ContactDetail ToDomain(this ContactDetailCreateRequest request, Guid contactId)
     {
         return new ContactDetail
         {
