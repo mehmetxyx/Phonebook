@@ -56,7 +56,7 @@ public class ContactReportDataRepositoryTests
             Id = Guid.NewGuid(),
             ContactId = contact2.Id,
             Type = InformationType.Location,
-            Value = "london"
+            Value = "paris"
         };
 
         context.Contacts.AddRange(contact1, contact2);
@@ -66,5 +66,9 @@ public class ContactReportDataRepositoryTests
         var result = await contactReportDataRepository.GetContactReportDataAsync();
 
         Assert.NotNull(result);
+        Assert.Equal(1, result.Count);
+        Assert.Equal("paris", result[0].Location);
+        Assert.Equal(2, result[0].ContactCount);
+        Assert.Equal(1, result[0].PhoneNumberCount);
     }
 }
