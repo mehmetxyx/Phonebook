@@ -77,4 +77,14 @@ public class ReportRepositoryTests
         Assert.NotNull(retrievedReport);
         Assert.Equal(report.Id, retrievedReport?.Id);
     }
+
+    [Fact]
+    public async Task GetByIdAsync_WhenReportDoesNotExist_Returns_Null()
+    {
+        var reportId = Guid.NewGuid();
+
+        var retrievedReport = await reportRepository.GetByIdAsync(reportId);
+
+        Assert.Null(retrievedReport);
+    }
 }
