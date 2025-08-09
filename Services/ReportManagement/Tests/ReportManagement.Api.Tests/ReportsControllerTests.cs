@@ -75,6 +75,18 @@ public class ReportsControllerTests
     }
 
     [Fact]
+    public async Task GetAllReportsAsync_WhenAnErrrorOccurs_Returns_NotFound()
+    {
+        var response = Result<List<ReportResponse>>.Failure(new List<ReportResponse>());
+
+        reportService.GetAllReportsAsync()
+            .Returns(response);
+
+        ActionResult<ApiResponse<List<ReportResponse>>> result = await reportController.GetAllReportsAsync();
+        Assert.IsType<NotFoundObjectResult>(result.Result);
+    }
+
+    [Fact]
     public async Task GetReportByIdAsync_WhenSuccessful_Returns_Report()
     {
         var reportId = Guid.NewGuid();

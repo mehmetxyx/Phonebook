@@ -81,6 +81,17 @@ public class ContactDetailServiceTests
     }
 
     [Fact]
+    public async Task GetAllContactDetailsAsync_WhenErrorOccurs_Returns_Failure()
+    {
+        contactDetailRepository.GetAllAsync(contactId)
+            .Returns<List<ContactDetail>>(x => throw new Exception());
+
+        var result = await contactDetailService.GetAllContactDetailsAsync(contactId);
+
+        Assert.False(result.IsSuccess);
+    }
+
+    [Fact]
     public async Task GetContactDetailByIdAsync_WhenSuccessful_Returns_ContactDetail()
     {
         var contactDetailId = Guid.NewGuid();
@@ -100,6 +111,18 @@ public class ContactDetailServiceTests
         var contactDetailId = Guid.NewGuid();
         contactDetailRepository.GetByIdAsync(contactId, contactDetailId)
             .Returns(Task.FromResult<ContactDetail?>(null));
+
+        var result = await contactDetailService.GetContactDetailByIdAsync(contactId, contactDetailId);
+
+        Assert.False(result.IsSuccess);
+    }
+
+    [Fact]
+    public async Task GetContactDetailByIdAsync_WhenErrorOccurs_Returns_Failure()
+    {
+        var contactDetailId = Guid.NewGuid();
+        contactDetailRepository.GetByIdAsync(contactId, contactDetailId)
+            .Returns<ContactDetail?>(x => throw new Exception());
 
         var result = await contactDetailService.GetContactDetailByIdAsync(contactId, contactDetailId);
 
@@ -132,6 +155,19 @@ public class ContactDetailServiceTests
 
         contactDetailRepository.GetByIdAsync(contactId, contactDetailId)
             .Returns(Task.FromResult<ContactDetail?>(null));
+
+        var result = await contactDetailService.DeleteContactDetailAsync(contactId, contactDetailId);
+
+        Assert.False(result.IsSuccess);
+    }
+
+    [Fact]
+    public async Task DeleteContactDetailAsync_WhenErrorOccurs_Returns_Failure()
+    {
+        var contactDetailId = Guid.NewGuid();
+
+        contactDetailRepository.GetByIdAsync(contactId, contactDetailId)
+            .Returns<ContactDetail?>(x => throw new Exception());
 
         var result = await contactDetailService.DeleteContactDetailAsync(contactId, contactDetailId);
 

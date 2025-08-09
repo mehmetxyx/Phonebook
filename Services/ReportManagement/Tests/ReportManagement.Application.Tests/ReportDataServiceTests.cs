@@ -53,4 +53,16 @@ public class ReportDataServiceTests
         Assert.True(result.IsSuccess);
         Assert.Equal("No report data found.", result.Message);
     }
+
+    [Fact]
+    public async Task GetAllReportData_WhenThrowException_Returns_False()
+    {
+        var reportId = Guid.NewGuid();
+        reportDataRepository.GetAllAsync(reportId)
+            .Returns<List<ReportData>>(x => throw new Exception());
+
+        var result = await reportDataService.GetAllReportData(reportId);
+
+        Assert.False(result.IsSuccess);
+    }
 }

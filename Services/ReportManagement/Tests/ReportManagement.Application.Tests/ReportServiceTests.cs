@@ -80,6 +80,17 @@ public class ReportServiceTests
     }
 
     [Fact]
+    public async Task GetAllReportsAsync_WhenExceptionOccurs_Returns_Failure()
+    {
+        reportRepository.GetAllAsync()
+            .Returns<Task<List<Report?>>>(x => throw new Exception());
+
+        var result = await reportService.GetAllReportsAsync();
+
+        Assert.False(result?.IsSuccess);
+    }
+
+    [Fact]
     public async Task GetReportByIdAsync_WhenCalled_Returns_Report()
     {
         var report = fixture.Create<Report>();
@@ -104,5 +115,17 @@ public class ReportServiceTests
 
         Assert.False(result.IsSuccess);
         Assert.Null(result?.Value);
+    }
+
+    [Fact]
+    public async Task GetReportByIdAsync_WhenExceptionOccurs_Returns_Failure()
+    {
+        var reportId = Guid.NewGuid();
+        reportRepository.GetByIdAsync(reportId)
+            .Returns<Task<Report?>>(x => throw new Exception());
+
+        var result = await reportService.GetReportByIdAsync(reportId);
+
+        Assert.False(result.IsSuccess);
     }
 }

@@ -106,6 +106,19 @@ public class ContactServiceTests
     }
 
     [Fact]
+    public async Task GetContactByIdAsync_WhenErrorOccurs_Returns_False()
+    {
+        var contact = fixture.Create<Contact>();
+
+        contactRepository.GetByIdAsync(contact.Id)
+            .Returns<Contact?>(x => throw new Exception());
+
+        var result = await contactService.GetContactByIdAsync(contact.Id);
+
+        Assert.False(result.IsSuccess);
+    }
+
+    [Fact]
     public async Task DeleteContactAsync_WhenContactDeleted_Returns_True()
     {
         var contact = fixture.Create<Contact>();
@@ -124,6 +137,18 @@ public class ContactServiceTests
 
         contactRepository.GetByIdAsync(contact.Id)
             .Returns(Task.FromResult<Contact?>(null));
+
+        var result = await contactService.DeleteContactAsync(contact.Id);
+        Assert.False(result.IsSuccess);
+    }
+
+    [Fact]
+    public async Task DeleteContactAsync_WhenErrorOccurs_Returns_False()
+    {
+        var contact = fixture.Create<Contact>();
+
+        contactRepository.GetByIdAsync(contact.Id)
+            .Returns<Contact?>(x => throw new Exception());
 
         var result = await contactService.DeleteContactAsync(contact.Id);
         Assert.False(result.IsSuccess);
