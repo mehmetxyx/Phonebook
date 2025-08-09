@@ -112,3 +112,14 @@ ul {
     font-size: 1.2rem;
     color: #007acc;
 }
+
+.detail-list {
+    margin-left: 2rem;
+    padding-left: 1rem;
+    border-left: 2px solid #ccc;
+}
+
+.selected-label {
+    margin-top: 1rem;
+    color: #555;
+}

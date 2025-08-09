@@ -148,8 +148,8 @@ async function loadReports() {
         const text = document.createElement("span");
         text.className = "list-text";
 
-        const formattedDate = new Date(report.requestDate).toLocaleString('tr-TR'); // or 'en-US' if preferred
-        text.textContent = `📝 Report ${report.id} - ${report.status ?? "Unknown"} (Requested: ${formattedDate})`;
+        const formattedDate = new Date(report.requestDate).toLocaleString('tr-TR');
+        text.textContent = `📝 Report ${report.id} - ${report.status} (Requested: ${formattedDate})`;
 
         const viewBtn = document.createElement("button");
         viewBtn.className = "list-button";

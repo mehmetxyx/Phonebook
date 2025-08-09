@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Phonebook Client</title>
-    <link rel="stylesheet" href="styles.css?v14" />
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
     <h1>📞 Phonebook</h1>
@@ -17,29 +17,31 @@
             <button type="submit">Add Contact</button>
         </form>
         <ul id="contact-list"></ul>
-        <h3>Details</h3>
-        <h4 id="selected-contact-label" style="margin-top: 1rem; color: #555;"></h4>
-        <form id="create-detail-form">
-            <select id="detail-type">
-                <option value="PhoneNumber">Phone</option>
-                <option value="Email">Email</option>
-                <option value="Location">Location</option>
-            </select>
-            <input type="text" placeholder="Value" id="detail-value" required />
-            <button type="submit">Add Detail</button>
-        </form>
-        <ul id="detail-list"></ul>
+        <div class="detail-list">
+            <h3>Details</h3>
+            <h4 id="selected-contact-label" class="selected-label"></h4>
+            <form id="create-detail-form">
+                <select id="detail-type">
+                    <option value="PhoneNumber">Phone</option>
+                    <option value="Email">Email</option>
+                    <option value="Location">Location</option>
+                </select>
+                <input type="text" placeholder="Value" id="detail-value" required />
+                <button type="submit">Add Detail</button>
+            </form>
+            <ul id="detail-list"></ul>
+        </div>
     </section>
 
     <section id="reports">
         <h2>Reports</h2>
-        <div style="margin-bottom: 1rem;">
+        <div class="detail-list"">
             <button id="request-report">Request Location Report</button>
-            <button id="refresh-report" style="margin-left: 0.5rem;">🔄 Refresh Reports</button>
+            <button id="refresh-report">🔄 Refresh Reports</button>
+            <h3>Report Details</h3>
+            <h4 id="selected-report-label" class="selected-label"></h4>
+            <ul id="report-detail-list" class="list-container"></ul>
         </div>
-        <h3>Report Details</h3>
-        <h4 id="selected-report-label" style="margin-top: 1rem; color: #555;"></h4>
-        <ul id="report-detail-list" class="list-container"></ul>
         <ul id="report-list" class="list-container"></ul>
     </section>
 
