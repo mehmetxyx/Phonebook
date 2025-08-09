@@ -15,15 +15,20 @@ public class ContactReportDataRepository : IContactReportDataRepository
 
     public async Task<List<ContactReportData>> GetContactReportDataAsync()
     {
-        var query = context.ContactDetails
-            .Where(cd => cd.Type == InformationType.Location)
-            .GroupBy(cd => cd.Value)
-            .Select(g => new ContactReportData
-            {
-                Location = g.Key,
-                ContactCount = g.Select(cd => cd.ContactId).Distinct().Count(),
-                PhoneNumberCount = context.ContactDetails.Count(pc => pc.Type == InformationType.PhoneNumber && pc.Value == g.Key),
-            });
+        var query = from lcd in context.ContactDetails
+                    where lcd.Type == InformationType.Location
+                    group lcd by lcd.Value into g
+                    select new ContactReportData {
+                        Location = g.Key,
+                        ContactCount = (from lg in g select lg.ContactId).Distinct().Count(),
+                        PhoneNumberCount = (
+                            from ic in context.Contacts
+                                    join icd in context.ContactDetails on ic.Id equals icd.ContactId
+                                    join pcd in context.ContactDetails on ic.Id equals pcd.ContactId
+                            where icd.Type == InformationType.Location && icd.Value == g.Key && pcd.Type == InformationType.PhoneNumber
+                            select pcd.Value
+                        ).Count()
+                    };
 
         return await query.ToListAsync();
     }
