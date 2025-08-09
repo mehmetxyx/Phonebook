@@ -40,5 +40,6 @@ app.UseCors(options =>
            .AllowAnyHeader();
 });
 
+app.Services.InitializeDatabase();
 
 app.Run();

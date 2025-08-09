@@ -29,4 +29,12 @@ public static class ServiceExtensions
         serviceCollection.AddScoped<IReportDataRepository, ReportDataRepository>();
         serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
     }
+
+    public static void InitializeDatabase(this IServiceProvider serviceProvider)
+    {
+        using var scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<ReportManagementDbContext>();
+        
+        dbContext.Database.Migrate();
+    }
 }

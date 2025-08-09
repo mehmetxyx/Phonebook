@@ -23,6 +23,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.Services.InitializeDatabase();
+
 //todo: Add CORS policy to allow requests from the Phonebook client
 app.UseCors(options => 
 {
