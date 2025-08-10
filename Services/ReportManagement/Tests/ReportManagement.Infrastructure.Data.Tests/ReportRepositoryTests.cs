@@ -111,4 +111,30 @@ public class ReportRepositoryTests
         Assert.Equal(report.Status, savedReport.Status);
     }
 
+
+    [Fact]
+    public async Task Update_WhenNotTracked_Returns_SavesReportToDatabase()
+    {
+        var report = fixture.Build<Report>()
+            .With(r => r.Status, ReportStatus.Pending)
+            .Create();
+
+        await reportRepository.AddAsync(report);
+        await context.SaveChangesAsync();
+
+        var reportEntity = context.Reports.Find(report.Id);
+
+        context.Entry(reportEntity).State = EntityState.Detached;
+
+        report.Status = ReportStatus.Completed;
+
+        reportRepository.Update(report);
+        await context.SaveChangesAsync();
+
+        var savedReport = await context.Reports.FirstOrDefaultAsync(r => r.Id == report.Id);
+
+        Assert.NotNull(savedReport);
+        Assert.Equal(report.Id, savedReport.Id);
+        Assert.Equal(report.Status, savedReport.Status);
+    }
 }

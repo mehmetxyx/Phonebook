@@ -110,4 +110,26 @@ public class ContactDetailRepositoryTests
 
         Assert.Null(deletedContactDetail);
     }
+
+    [Fact]
+    public async Task DeleteAsync_WhenEntityNotTracked_AttachesAndRemovesContactDetail()
+    {
+        var contactDetailEntity = fixture.Build<ContactDetailEntity>()
+            .With(c => c.ContactId, contactId)
+            .Without(c => c.Contact)
+            .Create();
+
+        await context.ContactDetails.AddAsync(contactDetailEntity);
+        await context.SaveChangesAsync();
+
+        context.Entry(contactDetailEntity).State = EntityState.Detached;
+
+        contactDetailRepository.Delete(contactDetailEntity.ToDomain());
+        await context.SaveChangesAsync();
+
+        var deletedContactDetail = await context.ContactDetails
+            .FirstOrDefaultAsync(cd => cd.Id == contactDetailEntity.Id);
+
+        Assert.Null(deletedContactDetail);
+    }
 }
