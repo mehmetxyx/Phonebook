@@ -3,6 +3,8 @@
 A containerized phonebook application built with .NET 9, EFCore, PostgreSQL, RabbitMQ, MassTransit, and Docker Compose — designed to demonstrate Clean Architecture within a microservices ecosystem. 
 Each service is independently deployable, testable, and structured for long-term maintainability and developer-friendly onboarding.
 
+Developed using **Test-Driven Development (TDD)** to ensure correctness and confidence in every feature.
+
 ---
 
 ## 🧱 Architecture Overview
@@ -82,11 +84,11 @@ Phonebook/
    ```
    *On Linux/macOS (bash/zsh):*
    ```bash
-   cd Phonebook/Deployments
+   cd Phonebook/Deployment
    ```
    *On Windows (PowerShell):*
       ```powershell
-   cd Phonebook\Deployments
+   cd Phonebook\Deployment
 	  ```
 
 2. Build and run the solution
@@ -108,7 +110,7 @@ Phonebook/
 
 4. In another terminal, you can check whether the containers are ready or not by running:
    ```bash
-   docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" | grep 'phonebook\.' | column -t -s $'\t'
+   docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
    ```
 
 	```bash
@@ -181,14 +183,16 @@ You can test the APIs directly using tools like Postman or curl.
   GET  /api/reports/{{report.id}}/data
 ```
 > All endpoints are hosted locally:
-- Contact Management API: [http://localhost:50501](http://localhost:50501)
-- Report Management API: [http://localhost:50502](http://localhost:50502)
+- Contact Management API: [http://localhost:50501](http://localhost:50501/api/contacts)
+- Report Management API: [http://localhost:50502](http://localhost:50502/api/reports)
 
 
 ---
 ## 📊 Test Coverage Summary
 
-This project includes comprehensive unit tests across all services. 
+This project includes comprehensive unit tests across all services.  
+Developed using **Test-Driven Development (TDD)**, with tests written before implementation to guide design and ensure reliability.
+
 Below is the latest coverage snapshot:
 
 | Metric             | Value                        |
