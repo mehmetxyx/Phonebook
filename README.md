@@ -183,8 +183,8 @@ You can test the APIs directly using tools like Postman or curl.
   GET  /api/reports/{{report.id}}/data
 ```
 > All endpoints are hosted locally:
-- Contact Management API: [http://localhost:50501](http://localhost:50501/api/contacts)
-- Report Management API: [http://localhost:50502](http://localhost:50502/api/reports)
+- Contact Management API: [http://localhost:50501/api/contacts](http://localhost:50501/api/contacts)
+- Report Management API: [http://localhost:50501/api/contacts](http://localhost:50502/api/reports)
 
 
 ---
