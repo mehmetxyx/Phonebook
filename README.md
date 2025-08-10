@@ -25,9 +25,10 @@ This project follows a **Clean Architecture** approach within a **microservices 
 - **Shared Infrastructure**  
   Includes messaging abstractions, event contracts, and common utilities used across services
 
+### General Architecture Diagram:
+ you can see the general workflow of the system in the diagram below:
 
 ![Architecture Overview](https://raw.githubusercontent.com/mehmetxyx/Phonebook/development/Docs/ArchitectureDiagram.png)
-![Architecture Overview](https://raw.githubusercontent.com/mehmetxyx/Phonebook/development/Docs/Phonebook_microservices_architecture_diagram.png)
 
 ---
 ## 📦 Technologies Used
