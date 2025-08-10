@@ -118,35 +118,38 @@ Phonebook/
   > If you see `Up` status for all services, everything is running smoothly.
 
 5. When the containers are ready, you can access the services at the following URLs:
+
    - Phonebook Web: http://localhost:53000
    - Contact API: http://localhost:50501/api/contacts
    - Report API: http://localhost:50502/api/reports
-   - RabbitMQ UI: http://localhost:15673 (guest/guest)
+   - RabbitMQ UI: http://localhost:15673, username: guest, password:guest
+   - PostgreSQL: host: localhost, port:55432, username: postgres, password:1234
 ---
 ## 🖥️ Using the Phonebook Web UI
 
 Once the app is running, visit [http://localhost:53000](http://localhost:53000) to access the Phonebook Web interface.
 
-### Available Features:
-- **Add Contact**:
-    <p>Enter contact name, surname and company</p>
-	<p>Click "Add Contact" to save</p>
+### Available Features
 
-- **Add Contact Detail**: 
-    <p>Select contact for adding details<p>
-	<p>Select detail type such as PhoneNumber, Email, or Location</p>
-	<p>Enter detail value and click "Add Detail"</p>
-	<p>Details will be saved and displayed in the contact's details list</p>
+**Add Contact**  
+- Enter contact name, surname, and company  
+- Click "Add Contact" to save  
 
-- **Generate Report**:
-    <p>Click "Requet Location Report" to create report request</p>
-	<p>Report will be added to the queue for processing and shown in the list</p>
-	<p>Report will be generated asynchronously</p>
-	<p>Once completed, report status will be updated to `Completed`</p>
+**Add Contact Detail**  
+- Select contact for adding details  
+- Select detail type such as `PhoneNumber`, `Email`, or `Location`  
+- Enter detail value and click `Add Detail`  
+- Details will be saved and displayed in the contact's details list  
 
-- **View Reports**:
-	<p>Click to `Refresh Reports` button to see update the report list and their status</p>
- 	<p>Click "View Report" to see the report details</p>
+**Generate Report**  
+- Click `Request Location Report` to create report request  
+- Report will be added to the queue for processing and shown in the list  
+- Report will be generated asynchronously  
+- Once completed, report status will be updated to `Completed`  
+
+**View Reports**  
+- Click the `Refresh Reports` button to update the report list and their status  
+- Click `View Report` to see the report details  
 
 ---
 ## 🧪 API Testing
