@@ -80,9 +80,14 @@ Phonebook/
    ```bash
    git clone git@github.com:mehmetxyx/Phonebook.git
    ```
+   *On Linux/macOS (bash/zsh):*
    ```bash
    cd Phonebook/Deployments
    ```
+   *On Windows (PowerShell):*
+      ```powershell
+   cd Phonebook\Deployments
+	  ```
 
 2. Build and run the solution
    ```bash
