@@ -188,12 +188,12 @@ Below is the latest coverage snapshot:
 
 | Metric             | Value                        |
 |--------------------|------------------------------|
-| **Line Coverage**  | 98.7% (841/852 lines)        |
-| **Branch Coverage**| 82.9% (68/82 branches)       |
+| **Line Coverage**  | 98.7% (905/916 lines)        |
+| **Branch Coverage**| 85.2% (75/88 branches)       |
 | **Assemblies**     | 14                           |
-| **Classes**        | 57                           |
-| **Files Analyzed** | 57                           |
-| **Coverage Date**  | August 9, 2025 — 4:50 PM to 7:06 PM |
+| **Classes**        | 59                           |
+| **Files Analyzed** | 59                           |
+| **Coverage Date**  | August 10, 2025 — 4:50 PM to 10:05 PM |
 
 > Coverage generated from 30 Cobertura reports using MultiReport parser.
 
@@ -214,6 +214,10 @@ To ensure meaningful metrics and avoid noise from boilerplate or auto-generated 
 - `Migrations/*` (via `-classfilters`)
 - `Program.cs` (via `-filefilters`)
 - `*ServiceExtensions.cs` (via `-filefilters`)
+
+### You can check the full code coverage report here:
+
+![Code Coverate report](./Docs/CodeCoverageReport.pdf)
 
 ---
 ## 🚧 Future Improvements

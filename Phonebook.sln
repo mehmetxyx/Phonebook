@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{02EA681E-C
 	ProjectSection(SolutionItems) = preProject
 		Docs\ArchitectureDiagram.png = Docs\ArchitectureDiagram.png
 		Docs\ArchitectureDiagram.drawio = Docs\ArchitectureDiagram.drawio
+		Docs\CodeCoverageReport.pdf = Docs\CodeCoverageReport.pdf
 		README.md = README.md
 	EndProjectSection
 EndProject
