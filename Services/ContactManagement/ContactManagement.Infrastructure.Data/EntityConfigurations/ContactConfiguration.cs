@@ -32,6 +32,6 @@ public class ContactConfiguration: IEntityTypeConfiguration<ContactEntity>
         builder.HasMany(c => c.ContactDetails)
             .WithOne(c => c.Contact)
             .HasForeignKey(cd => cd.ContactId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
