@@ -19,50 +19,85 @@ document.getElementById("create-contact-form").addEventListener("submit", async 
 });
 
 async function loadContacts() {
-
     const res = await fetch(contactsApi);
     const data = await res.json();
     const list = document.getElementById("contact-list");
     list.innerHTML = "";
 
+    const label = document.getElementById("selected-contact-label");
+    label.textContent = "Select a contact to view its details!";
+
     data.data.forEach(contact => {
-
-        const li = document.createElement("li");
-        li.className = "list-item";
-
-        const info = document.createElement("div");
-        info.className = "contact-info";
-
-        const icon = document.createElement("span");
-        icon.className = "contact-icon";
-        icon.textContent = "📄";
-
-        const text = document.createElement("span");
-        text.className = "list-text";
-        text.textContent = `${contact.name} ${contact.surname} (${contact.company})`;
-
-        info.appendChild(icon);
-        info.appendChild(text);
-        li.appendChild(info);
-
-        li.onclick = () => {
-            selectedContactId = contact.id;
-            selectedContact = contact;
-
-            const label = document.getElementById("selected-contact-label");
-            label.textContent = `For contact: ${contact.name} ${contact.surname} (${contact.company})`;
-
-            loadDetails(contact.id);
-
-            document.querySelectorAll("#contact-list .list-item")
-                .forEach(el => el.classList.remove("selected"));
-
-            li.classList.add("selected");
-        };
-
+        const li = createContactListItem(contact);
         list.appendChild(li);
-
     });
+}
+
+function createContactListItem(contact) {
+    const listItem = document.createElement("li");
+    listItem.className = "list-item";
+
+    const info = document.createElement("div");
+    info.className = "contact-info";
+
+    const icon = document.createElement("span");
+    icon.className = "contact-icon";
+    icon.textContent = "📄";
+
+    const text = document.createElement("span");
+    text.className = "list-text";
+    text.textContent = `${contact.name} ${contact.surname} (${contact.company})`;
+
+    info.appendChild(icon);
+    info.appendChild(text);
+    listItem.appendChild(info);
+
+    listItem.onclick = () => handleContactSelect(contact, listItem);
+
+    const delBtn = document.createElement("button");
+    delBtn.className = "list-button delete";
+    delBtn.textContent = "Delete";
+    delBtn.onclick = (e) => handleContactDelete(e, contact);
+
+    listItem.appendChild(delBtn);
+
+    return listItem;
+}
+
+function handleContactSelect(contact, liElement) {
+    selectedContactId = contact.id;
+    selectedContact = contact;
+
+    const selectedContactLabel = document.getElementById("selected-contact-label");
+    selectedContactLabel.textContent = `For contact: ${contact.name} ${contact.surname} (${contact.company})`;
+
+    loadContactDetails(contact.id);
+
+    document.querySelectorAll("#contact-list .list-item")
+        .forEach(el => el.classList.remove("selected"));
+
+    liElement.classList.add("selected");
+}
+
+async function handleContactDelete(event, contact) {
+    event.stopPropagation();
+
+    const confirmed = confirm(`Are you sure you want to delete ${contact.name} ${contact.surname}?`);
+    if (!confirmed) return;
+
+    const deleteRes = await fetch(`${contactsApi}/${contact.id}`, {
+        method: "DELETE"
+    });
+
+    if (deleteRes.ok) {
+        selectedContactId = null;
+        selectedContact = null;
+        document.getElementById("selected-contact-label").textContent = "";
+        document.getElementById("detail-list").innerHTML = "";
+        loadContacts();
+    } else {
+        alert("Failed to delete contact.");
+    }
 }
 
 document.getElementById("create-detail-form").addEventListener("submit", async (e) => {
@@ -78,10 +113,10 @@ document.getElementById("create-detail-form").addEventListener("submit", async (
         body: JSON.stringify({ type, value }),
     });
 
-    loadDetails(selectedContactId);
+    loadContactDetails(selectedContactId);
 });
 
-async function loadDetails(contactId) {
+async function loadContactDetails(contactId) {
 
     const res = await fetch(`${contactsApi}/${contactId}/details`);
     const data = await res.json();
@@ -105,7 +140,7 @@ async function loadDetails(contactId) {
             await fetch(`${contactsApi}/${contactId}/details/${detail.id}`, {
                 method: "DELETE"
             });
-            loadDetails(contactId);
+            loadContactDetails(contactId);
         };
 
         li.appendChild(text);
@@ -165,23 +200,23 @@ async function loadReports() {
 
 async function showReportDetail(reportId) {
 
-    const detailRes = await fetch(`${reportsApi}/${reportId}/data`);
-    const detailData = await detailRes.json();
+    const reportDetailResult = await fetch(`${reportsApi}/${reportId}/data`);
+    const reportDetailResponse = await reportDetailResult.json();
 
-    const reportRes = await fetch(`${reportsApi}/${reportId}`);
-    const reportMeta = await reportRes.json();
-    const report = reportMeta.data;
+    const reportResult = await fetch(`${reportsApi}/${reportId}`);
+    const reportResponse = await reportResult.json();
+    const reportData = reportResponse.data;
 
-    const label = document.getElementById("selected-report-label");
-    const formattedDate = new Date(report.requestDate).toLocaleString('tr-TR');
-    label.textContent = `For report id: #${report.id} (Requested at: ${formattedDate})`;
+    const selectedReportLabel = document.getElementById("selected-report-label");
+    const formattedDate = new Date(reportData.requestDate).toLocaleString('tr-TR');
+    selectedReportLabel.textContent = `For report id: #${reportData.id} (Requested at: ${formattedDate})`;
 
     reportDetailList.style.display = "block";
     reportDetailList.innerHTML = "";
 
-    const details = detailData.data;
+    const reportDetailData = reportDetailResponse.data;
 
-    if (!details || details.length === 0) {
+    if (!reportDetailData || reportDetailData.length === 0) {
         const emptyMessage = document.createElement("li");
         emptyMessage.className = "list-item";
         emptyMessage.innerHTML = `<span class="list-text">📭 No report data available yet.</span>`;
@@ -189,7 +224,7 @@ async function showReportDetail(reportId) {
         return;
     }
 
-    details.forEach(item => {
+    reportDetailData.forEach(item => {
 
         const locationItem = document.createElement("li");
         locationItem.className = "list-item";
@@ -212,7 +247,6 @@ async function showReportDetail(reportId) {
     });
 
 }
-
 
 loadContacts();
 loadReports();
